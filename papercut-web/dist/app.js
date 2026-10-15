@@ -14,6 +14,7 @@
   function templateState(template) { return {folds:template.folds,color:template.color,cuts:G.pattern(template.id,template.folds),name:template.name}; }
   let state = templateState(templates[0]);
   let history = [], future = [], tool = 'leaf', pending = [], collection = [], dirty = false;
+  let aiProposal = null;
   let toastTimer, analysisTimer, draftTimer, confirmAction, islandOverlay = '', analysisCanvas;
   let savedDraftWorks = true;
   const clone = data => JSON.parse(JSON.stringify(data));
@@ -74,6 +75,7 @@
     $('#preview-art').innerHTML = G.artworkSVG(state,'preview-mask');
     $('#art-title').textContent = state.name;
     $('#art-subtitle').textContent = foldNames[state.folds] + '对称 / ' + (colorNames[state.color] || '自选纸色');
+    $('#export-ai-record').classList.toggle('hidden', !state.ai);
     $('#cut-count').textContent = state.cuts.length + ' 组剪口';
     $('#undo').disabled = !history.length; $('#redo').disabled = !future.length;
     $$('[data-fold]').forEach(button => { const selected = +button.dataset.fold === state.folds; button.classList.toggle('selected', selected); button.setAttribute('aria-pressed',selected); });
@@ -153,6 +155,12 @@
     const url=URL.createObjectURL(blob); const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);
   }
   function exportName() { return (state.name || '纸上生花').replace(/[\\/:*?"<>|]/g,'_'); }
+  function exportAiRecord() {
+    if (!state.ai) return;
+    const record = { ...state.ai, finalWork: clone(state) };
+    download(new Blob([JSON.stringify(record,null,2)],{type:'application/json;charset=utf-8'}),exportName()+'-创作记录.json');
+    toast('已导出 AI 草案与最终作品记录');
+  }
   function exportSVG() {
     if($('#result-dialog').open){state.name=$('#work-name').value.trim()||'我的第一幅窗花';render();persistDraft();}
     download(new Blob([G.artworkSVG(state,'export-mask')],{type:'image/svg+xml;charset=utf-8'}),exportName()+'.svg');toast('已导出 SVG，可用于放大和打印');
@@ -193,12 +201,50 @@
       $('#confirm-message').textContent='删除这幅收藏后无法恢复。你可以先继续创作并导出图片。';$('#confirm-title').textContent='删除这幅收藏？';$('#confirm-dialog').showModal();
     }));
   }
+  function proposalState(plan, brief, model) {
+    const cuts = plan.motifs.map(motif => {
+      const point = G.polar(motif.radius, G.TAU / plan.folds * motif.fraction);
+      return G.shape(motif.shape, point[0], point[1], motif.size);
+    });
+    const result = { folds:plan.folds, color:plan.color, cuts, name:plan.title,
+      ai:{ provider:'阿里云百炼 · 千问', model, brief, plan:clone(plan), generatedAt:new Date().toISOString() } };
+    if (!G.validState(result)) throw new Error('方案无法转换为剪纸图案');
+    return result;
+  }
+  async function generateAi() {
+    const brief = $('#ai-brief').value.trim();
+    if (brief.length < 4 || brief.length > 200) { toast('请用 4 到 200 字描述创作需求'); return; }
+    $('#ai-generate').disabled = true;
+    $('#ai-status').textContent = '正在构思剪纸草案…';
+    $('#ai-proposal').classList.add('hidden'); aiProposal = null;
+    try {
+      if (location.protocol === 'file:') throw new Error('请用 node server.cjs 启动工坊后体验 AI 生成');
+      const response = await fetch('/api/design',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({brief})});
+      const data = await response.json().catch(()=>({error:'此地址尚未接入 AI 服务，请运行项目服务端'}));
+      if (!response.ok) throw new Error(data.error || '生成失败，请稍后重试');
+      aiProposal = proposalState(data.plan,data.brief,data.model);
+      $('#ai-art').innerHTML = G.artworkSVG(aiProposal,'ai-proposal-mask');
+      $('#ai-title').textContent = data.plan.title;
+      $('#ai-explanation').textContent = data.plan.explanation;
+      $('#ai-proposal').classList.remove('hidden');
+      $('#ai-status').textContent = '草案已生成，可以预览并继续创作';
+    } catch (error) { $('#ai-status').textContent = error.message || '生成失败，请稍后重试'; }
+    finally { $('#ai-generate').disabled = false; }
+  }
+  function applyAi() {
+    if (!aiProposal) return;
+    const generated = clone(aiProposal);
+    askReplace(()=>{ commit(()=>state=generated); changeView('workshop'); toast('已载入 AI 草案，你可以继续裁剪和修改'); });
+  }
   loadStorage();renderTemplates();renderCollection();render();selectTool('leaf');
+  $('#ai-generate').addEventListener('click',generateAi);
+  $('#ai-apply').addEventListener('click',applyAi);
+  $('#export-ai-record').addEventListener('click',exportAiRecord);
   $$('[data-view]').forEach(button=>button.addEventListener('click',()=>changeView(button.dataset.view)));
   $('.brand').addEventListener('click',event=>{event.preventDefault();changeView('workshop');});
   $('#see-patterns').addEventListener('click',()=>changeView('patterns'));
   $$('[data-tool]').forEach(button=>button.addEventListener('click',()=>selectTool(button.dataset.tool)));
-  $$('[data-fold]').forEach(button=>button.addEventListener('click',()=>{const folds=+button.dataset.fold;if(folds===state.folds)return;askReplace(()=>{commit(()=>{state.folds=folds;state.cuts=G.pattern('bloom',folds);state.name='团花 · 初见';});toast('已更换折法，并铺好对应的练习纹样');});}));
+  $$('[data-fold]').forEach(button=>button.addEventListener('click',()=>{const folds=+button.dataset.fold;if(folds===state.folds)return;askReplace(()=>{commit(()=>{state.folds=folds;state.cuts=G.pattern('bloom',folds);state.name='团花 · 初见';delete state.ai;});toast('已更换折法，并铺好对应的练习纹样');});}));
   $$('[data-color]').forEach(button=>button.addEventListener('click',()=>{if(state.color!==button.dataset.color)commit(()=>state.color=button.dataset.color);}));
   $('#cut-size').addEventListener('input',()=>$('#size-value').textContent=$('#cut-size').value);
   $('#show-guides').addEventListener('change',renderEditor);
@@ -212,7 +258,7 @@
   });
   $('#keyboard-cut').addEventListener('click',()=>{if(tool==='free'){toast('自由剪请在画布点选；键盘试剪可选柳叶、圆孔或月牙角');return;}cutAt(G.polar(195,G.TAU/state.folds*.32));});
   $('#finish-cut').addEventListener('click',finishCut);$('#undo').addEventListener('click',undo);$('#redo').addEventListener('click',redo);
-  $('#reset').addEventListener('click',()=>askReplace(()=>{commit(()=>{state.cuts=[];state.name='我的第一幅窗花';});toast('新纸已铺好，开始你的第一剪');}));
+  $('#reset').addEventListener('click',()=>askReplace(()=>{commit(()=>{state.cuts=[];state.name='我的第一幅窗花';delete state.ai;});toast('新纸已铺好，开始你的第一剪');}));
   $('#help').addEventListener('click',()=>$('#help-dialog').showModal());
   $$('[data-close]').forEach(button=>button.addEventListener('click',()=>button.closest('dialog').close()));
   $$('dialog').forEach(dialog=>dialog.addEventListener('click',event=>{if(event.target===dialog){const r=dialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)dialog.close();}}));
