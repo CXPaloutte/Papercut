@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f6f3ec">
+  <meta name="description" content="纸上生花，一个可以亲手试剪的数字剪纸工坊。在折叠与展开之间，把心意剪成花。">
+  <title>纸上生花 · 剪纸互动工坊</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='9' fill='%23ad352b'/%3E%3Ctext x='20' y='28' text-anchor='middle' font-size='26' fill='%23fff6e7'%3E纸%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <script src="geometry.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+    <symbol id="i-cut" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="m8 8 12 12M8 16 20 4M14 12l6-8"/></symbol>
+    <symbol id="i-flower" viewBox="0 0 24 24"><path d="M12 9C3-4-4 12 9 12c-13 9 3 16 3 3 9 13 16-3 3-3 13-9-3-16-3-3Z"/><circle cx="12" cy="12" r="2"/></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24"><path d="m9 5-6 6 6 6M3 11h11a6 6 0 0 1 6 6"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M12 5v16M3 3l9 2 9-2v16l-9 2-9-2Z"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4 10-10"/></symbol>
+    <symbol id="i-save" viewBox="0 0 24 24"><path d="M5 3h14v18l-7-5-7 5Z"/></symbol>
+    <symbol id="i-reset" viewBox="0 0 24 24"><path d="M4 10a8 8 0 1 1 1 8M4 3v7h7"/></symbol>
+    <symbol id="i-expand" viewBox="0 0 24 24"><path d="m12 3 9 9-9 9-9-9ZM12 3v18M3 12h18"/></symbol>
+  </defs></svg>
+  <header class="site-header">
+    <a href="#" class="brand" aria-label="纸上生花首页"><span class="brand-seal">纸</span><span class="brand-name">纸上生花<small>PAPER BLOOMS</small></span></a>
+    <nav aria-label="主导航"><button class="nav-link active" data-view="workshop">剪纸工坊</button><button class="nav-link" data-view="patterns">纹样灵感</button><button class="nav-link" data-view="collection">我的作品<span id="collection-count">0</span></button></nav>
+    <button class="quiet-button help-button" id="help"><svg><use href="#i-book"/></svg>初次来访？</button>
+  </header>
+  <main>
+    <section class="page-intro"><div><p class="eyebrow"><span></span> 一纸一剪 · 万象新生</p><h1 id="page-title">把心意，<em>剪成花。</em></h1><p id="page-description">从一张红纸开始，在折叠与展开之间，遇见自己的第一幅窗花。</p></div><div class="intro-note"><span>一折，是巧思</span><span>一剪，是心意</span><i>手作的温度，在此延续</i></div></section>
+    <div id="workshop-view">
+      <section class="workbench" aria-label="剪纸创作台">
+        <aside class="tool-panel">
+          <div class="panel-heading"><span>创作工具</span><small>TOOLBOX</small></div>
+          <div class="tool-section"><label for="folds"><span class="step-number">01</span>选择折法</label><div class="fold-options" id="folds" role="group" aria-label="对称份数"><button data-fold="4"><span>◈</span>四瓣</button><button data-fold="6"><span>✻</span>六瓣</button><button data-fold="8" class="selected"><span>✳</span>八瓣</button></div><p class="field-note">剪下一处，对称生成整幅图案</p></div>
+          <div class="tool-section"><label><span class="step-number">02</span>挑一把「剪刀」</label><div class="shape-options" role="group" aria-label="剪切形状"><button data-tool="leaf" class="selected"><span>♧</span>柳叶剪</button><button data-tool="circle"><span>○</span>圆孔剪</button><button data-tool="triangle"><span>△</span>月牙角</button><button data-tool="free"><svg><use href="#i-cut"/></svg>自由剪</button></div><p class="field-note" id="tool-note">在纸面点击，剪出一枚柳叶</p><div class="size-label"><label for="cut-size">剪口大小</label><output id="size-value">28</output></div><input type="range" id="cut-size" min="10" max="65" value="28" aria-label="剪口大小"><button class="text-button hidden" id="finish-cut">完成路径并裁剪 ↵</button></div>
+          <div class="tool-section"><label><span class="step-number">03</span>选一抹纸色</label><div class="color-options" role="group" aria-label="纸张颜色"><button class="color-swatch selected" data-color="#b5382d" style="--swatch:#b5382d" aria-label="朱砂红" title="朱砂红"></button><button class="color-swatch" data-color="#94413c" style="--swatch:#94413c" aria-label="胭脂红" title="胭脂红"></button><button class="color-swatch" data-color="#ad7f35" style="--swatch:#ad7f35" aria-label="秋香金" title="秋香金"></button><button class="color-swatch" data-color="#426d68" style="--swatch:#426d68" aria-label="松石绿" title="松石绿"></button></div></div>
+          <div class="tool-bottom"><svg><use href="#i-flower"/></svg><p>不必剪得完美<br><strong>每一剪，都有你的模样。</strong></p></div>
+        </aside>
+        <section class="canvas-panel">
+          <div class="canvas-toolbar"><div><span class="live-dot"></span><span id="canvas-mode-label">对称剪纸</span><span class="divider"></span><small id="cut-count">0 次裁剪</small></div><div class="history-buttons"><button id="undo" class="icon-button" title="撤销 Ctrl+Z" aria-label="撤销"><svg><use href="#i-back"/></svg></button><button id="redo" class="icon-button redo" title="重做 Ctrl+Shift+Z" aria-label="重做"><svg><use href="#i-back"/></svg></button><button id="reset" class="icon-button" title="换一张空白纸" aria-label="换一张空白纸"><svg><use href="#i-reset"/></svg></button></div></div>
+          <div class="paper-stage" id="paper-stage"><div class="stage-caption">落剪有形，展开有惊喜</div><span class="corner top-left"></span><span class="corner bottom-right"></span><svg id="editor" viewBox="0 0 600 600" role="img" aria-label="交互剪纸画布，点击纸面裁剪；键盘用户可使用下方在中心试剪按钮"></svg><div class="stage-stamp">亲<br>手<br>作</div><div class="stage-scale"><span></span>一张纸的无限可能<span></span></div></div>
+          <div class="canvas-footer"><label class="toggle-label"><input id="show-guides" type="checkbox" checked><span class="toggle"></span>折线辅助</label><button id="keyboard-cut" class="text-button">在选区试剪</button><span id="canvas-hint">点击试剪 · Ctrl + Z 撤销</span></div>
+        </section>
+        <aside class="preview-panel"><div class="panel-heading"><span>展开之后</span><small>PREVIEW</small></div><div class="preview-art" id="preview-art"></div><div class="preview-title"><h2 id="art-title">团花 · 初见</h2><p id="art-subtitle">八瓣对称 / 朱砂红</p></div><div class="structure-card" id="structure-card"><div><svg><use href="#i-check"/></svg><strong id="structure-title">正在查看纸张结构</strong></div><p id="structure-description">每次落剪后，为你检查图案的连接。</p></div><p class="structure-footnote">按屏幕图形估算连接；实际剪制还需考虑纸张和尺寸。</p><button class="primary-button" id="unfold"><svg><use href="#i-expand"/></svg>展开这份心意</button><div class="secondary-actions"><button id="save"><svg><use href="#i-save"/></svg>收藏</button><button id="export"><svg><use href="#i-download"/></svg>导出</button></div><p class="local-note" id="save-note">作品保存在当前浏览器</p></aside>
+      </section>
+      <section class="inspiration-section"><div class="section-top"><div><span class="eyebrow">A LITTLE INSPIRATION</span><h2>灵感，从这里开始</h2></div><button class="text-button" id="see-patterns">探索纹样 <svg><use href="#i-arrow"/></svg></button></div><div class="template-grid" id="template-grid"></div></section>
+    </div>
+    <section id="patterns-view" class="hidden gallery-view"><div class="section-top"><p>先从一枚简单的纹样出发，再剪出自己的变化。</p><span class="small-tag">原创练习纹样</span></div><div class="pattern-grid" id="pattern-grid"></div><p class="gallery-note">这些图案为本工坊原创几何练习，不代表特定地域或传承人的传统谱样。</p></section>
+    <section id="collection-view" class="hidden gallery-view"><div id="collection-grid" class="pattern-grid"></div><div id="empty-collection" class="empty-state"><svg><use href="#i-save"/></svg><h2>把第一份心意留在这里</h2><p>在工坊点击「收藏」，就能保存作品并随时继续创作。</p><button class="primary-button" data-view="workshop">去剪一幅窗花</button></div></section>
+    <footer class="site-footer"><span>纸上生花 <i>·</i> 让传统，在指尖继续</span><span>慢一点，感受一纸一剪的美好。<svg><use href="#i-flower"/></svg></span></footer>
+  </main>
+  <dialog id="help-dialog"><button class="dialog-close" data-close aria-label="关闭">×</button><span class="eyebrow">YOUR FIRST PAPER BLOOM</span><h2>三步，剪出第一份心意</h2><ol class="help-steps"><li><b>选一种折法</b><p>四瓣、六瓣或八瓣，决定图案如何对称重复。</p></li><li><b>在纸上落剪</b><p>选择柳叶、圆孔或三角剪口，点击红纸即可裁剪。自由剪需要依次点击至少三个点，再按 Enter 或「完成路径」。Esc 取消未完成路径。</p></li><li><b>展开，留住这一刻</b><p>检查连接提示，展开你的作品，收藏或导出透明背景图片。</p></li></ol><p class="dialog-note">这是预设对称折法的数字体验。结构提示将最大连接部分视为保留主体，小碎片需要你结合设计判断。</p><button class="primary-button" data-close>开始我的第一剪 <svg><use href="#i-arrow"/></svg></button></dialog>
+  <dialog id="result-dialog" class="result-dialog"><button class="dialog-close" data-close aria-label="关闭">×</button><div class="result-scene"><div class="window-lattice"></div><div id="result-art"></div><span>一窗好景，一纸心意</span></div><div class="result-content"><span class="eyebrow">MADE BY YOU</span><h2>这一朵，独一无二。</h2><p>光穿过镂空的地方，心意便有了形状。</p><label for="work-name">给作品起个名字</label><input id="work-name" maxlength="24" placeholder="我的第一幅窗花"><div class="result-actions"><button class="primary-button" id="result-save"><svg><use href="#i-save"/></svg>收藏作品</button><button class="outline-button" id="result-export"><svg><use href="#i-download"/></svg>导出 PNG</button></div><button class="text-button" id="export-svg">下载矢量 SVG</button></div></dialog>
+  <dialog id="confirm-dialog"><h2 id="confirm-title">换一张新纸？</h2><p id="confirm-message">当前作品尚未收藏，继续会替换当前画布。</p><div class="confirm-actions"><button class="outline-button" id="confirm-cancel">再想想</button><button class="primary-button" id="confirm-ok">继续</button></div></dialog>
+  <div id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
