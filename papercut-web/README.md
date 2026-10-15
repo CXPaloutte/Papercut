@@ -1,6 +1,16 @@
 # 纸上生花 · 网页初版
 
-直接用浏览器打开 `dist/index.html` 即可体验，不需要安装依赖。所有字体、图形与逻辑均在本地，无外部资源请求。
+剪纸工坊可以直接用浏览器打开 `dist/index.html`，不需要安装依赖。AI 草案功能需要启动同目录的 Node.js 服务端，并调用阿里云百炼的千问模型。浏览器中不保存模型密钥。
+
+## AI 草案功能
+
+1. 安装 Node.js 18 或更新版本，在运行服务端的环境中设置 `DASHSCOPE_API_KEY`。不要把密钥写入前端文件或提交到仓库。
+2. 在 `papercut-web` 目录执行 `node server.cjs`，用浏览器访问 `http://127.0.0.1:8080`。
+3. 输入赠送对象和祝福需求，点击「生成设计草案」，预览后载入工坊。此后仍可使用已有的裁剪、撤销、连接提示与导出功能。载入后的作品可下载包含输入、模型、原始方案和最终图案的创作记录 JSON。
+
+默认使用 `qwen-plus` 和百炼北京地域原有兼容接口。可用 `QWEN_MODEL` 改模型，或用 `QWEN_API_URL` 指定业务空间的完整 Chat Completions 请求地址；`PORT`、`HOST` 可调整监听地址。API 接口及 JSON 输出规则参见[百炼 Chat 文档](https://help.aliyun.com/zh/model-studio/qwen-api-via-openai-chat-completions)和[结构化输出文档](https://help.aliyun.com/zh/model-studio/qwen-structured-output)。
+
+生成结果仅由柳叶、圆孔、三角剪口组合，是可编辑的原创几何练习，不代表某一传统谱样；设计说明不作为传统寓意的考据。模型参数经服务端白名单和范围校验，草案载入后仍需人工检查结构。当前静态托管配置只会部署 `dist`，因此线上 AI 功能还需要部署服务端或等价的后端接口；默认服务仅监听本机，若公开服务需补访问限制与请求限额。
 
 ## 已实现
 
@@ -11,6 +21,7 @@
 - 作品展开动效、窗花场景、原创几何纹样。
 - 浏览器草稿和收藏，透明 PNG 与矢量 SVG 导出。
 - 桌面与手机布局，键盘试剪、快捷键和减少动画偏好支持。
+- 千问依据用户需求输出受约束的几何剪纸草案，可预览、继续编辑并导出 AI 创作记录。
 
 ## 使用方法
 
@@ -22,4 +33,4 @@
 
 作品仅保存在当前浏览器，同一文件位置或同一网站地址下可恢复；清理浏览器数据或更换地址可能丢失，重要作品请导出。PNG 为 1800 × 1800 透明图片，SVG 可缩放打印，但尚未指定实体打印尺寸。
 
-代码采用原生 JavaScript 函数组织，无构建步骤。核心几何逻辑在 `dist/geometry.js`，界面与状态管理在 `dist/app.js`。
+代码采用原生 JavaScript 函数组织，无构建步骤。核心几何逻辑在 `dist/geometry.js`，界面与状态管理在 `dist/app.js`，服务端在 `server.cjs`，方案校验在 `design.cjs`。运行 `node verify.cjs` 和 `node --test design.test.cjs` 可检查几何与 AI 接口逻辑。`verify.cjs` 可选的浏览器检查需要本机 Playwright 路径与 Chrome 路径。
