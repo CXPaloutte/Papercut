@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>纸上生花 — 纸间光影与一刀万象 · 非遗剪纸数字艺术首页</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base: #F6F0E4;
+      --bg-secondary: #EDE3D0;
+      --paper-main: #B81D18;
+      --paper-secondary: #8E120E;
+      --paper-gold: #D4AF37;
+      --ink-text: #231815;
+      --light-x: 50%;
+      --light-y: 42%;
+      --shadow-dx: 0px;
+      --shadow-dy: 10px;
+    }
+
+    body.lantern-night {
+      --bg-base: #110B0A;
+      --bg-secondary: #1C1210;
+      --ink-text: #F7EFE4;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+      background-color: var(--bg-base);
+      color: var(--ink-text);
+      overflow-x: hidden;
+      transition: background-color 0.7s cubic-bezier(0.22, 1, 0.36, 1), color 0.7s ease;
+    }
+
+    .font-serif-cn {
+      font-family: 'Noto Serif SC', "Songti SC", STSong, serif;
+    }
+
+    /* Handmade Xuan Paper Fiber & Dynamic Lantern Spotlight */
+    .theater-backdrop {
+      background:
+        radial-gradient(650px circle at var(--light-x) var(--light-y), rgba(255, 224, 150, 0.38) 0%, rgba(212, 175, 55, 0.08) 45%, transparent 75%),
+        repeating-linear-gradient(35deg, rgba(120, 90, 70, 0.02) 0px, rgba(120, 90, 70, 0.02) 1px, transparent 1px, transparent 7px),
+        linear-gradient(180deg, var(--bg-base) 0%, var(--bg-secondary) 100%);
+    }
+
+    body.lantern-night .theater-backdrop {
+      background:
+        radial-gradient(620px circle at var(--light-x) var(--light-y), rgba(255, 185, 75, 0.32) 0%, rgba(184, 29, 24, 0.14) 42%, transparent 75%),
+        radial-gradient(circle at 50% 35%, #2A1512 0%, #110B0A 78%);
+    }
+
+    /* Dynamic Multi-Layer Paper Cutout Shadows (Responds to Mouse Light Source) */
+    .paper-layer-far {
+      filter: drop-shadow(calc(var(--shadow-dx) * 0.5) calc(var(--shadow-dy) * 0.5) 8px rgba(35, 15, 12, 0.22));
+      transition: transform 0.18s ease-out;
+    }
+
+    .paper-layer-mid {
+      filter: drop-shadow(var(--shadow-dx) var(--shadow-dy) 16px rgba(35, 15, 12, 0.35));
+      transition: transform 0.15s ease-out;
+    }
+
+    .paper-layer-near {
+      filter: drop-shadow(calc(var(--shadow-dx) * 1.4) calc(var(--shadow-dy) * 1.4) 24px rgba(25, 8, 6, 0.48));
+      transition: transform 0.12s ease-out;
+    }
+
+    body.lantern-night .paper-layer-mid,
+    body.lantern-night .paper-layer-near {
+      filter:
+        drop-shadow(0 0 18px rgba(255, 188, 82, 0.32))
+        drop-shadow(var(--shadow-dx) var(--shadow-dy) 24px rgba(0, 0, 0, 0.85));
+    }
+
+    /* Traditional Shaped Window Portals (Non-Rectangular!) */
+    .portal-moon {
+      border-radius: 9999px;
+    }
+    .portal-begonia {
+      /* Begonia (海棠花窗) organic lobed silhouette via clip-path / border-radius */
+      border-radius: 42% 58% 45% 55% / 55% 45% 55% 45%;
+    }
+    .portal-octagon {
+      clip-path: polygon(28% 0%, 72% 0%, 100% 28%, 100% 72%, 72% 100%, 28% 100%, 0% 72%, 0% 28%);
+    }
+    .portal-fan {
+      border-radius: 50% 50% 18% 18% / 65% 65% 25% 25%;
+    }
+    .portal-gourd {
+      border-radius: 48% 52% 46% 54% / 38% 38% 62% 62%;
+    }
+    .portal-leaf {
+      border-radius: 65% 35% 62% 38% / 40% 62% 38% 60%;
+    }
+
+    .window-portal-card {
+      position: relative;
+      transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.55s ease;
+    }
+    .window-portal-card:hover {
+      transform: translateY(-10px) scale(1.035);
+    }
+
+    /* Glowing Backlight Inside Each Architectural Window Portal */
+    .portal-inner-glow {
+      background: radial-gradient(circle at 50% 42%, #FFFDF8 0%, #F7E5C4 62%, #E2C596 100%);
+      box-shadow: inset 0 0 32px rgba(184, 29, 24, 0.18), 0 18px 40px -12px rgba(72, 16, 14, 0.32);
+      transition: all 0.5s ease;
+    }
+    body.lantern-night .portal-inner-glow {
+      background: radial-gradient(circle at 50% 42%, #FFE5A3 0%, #E58C2E 58%, #6B2011 100%);
+      box-shadow: inset 0 0 42px rgba(255, 224, 140, 0.65), 0 0 45px rgba(245, 166, 66, 0.28);
+    }
+
+    /* Vertical Classical Typography */
+    .vertical-rl {
+      writing-mode: vertical-rl;
+      text-orientation: upright;
+    }
+
+    /* Seal Stamp */
+    .cinnabar-seal {
+      border: 1.5px solid #B81D18;
+      background-color: rgba(184, 29, 24, 0.92);
+      color: #FFFDF8;
+      box-shadow: inset 0 0 0 2px #F6F0E4;
+    }
+
+    /* Floating Paper Particles Animation */
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-14px) rotate(5deg); }
+    }
+    .animate-float-slow {
+      animation: floatSlow 7s ease-in-out infinite;
+    }
+    .animate-float-delayed {
+      animation: floatSlow 9s ease-in-out 2.5s infinite;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-base);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--paper-main);
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="theater-backdrop min-h-screen selection:bg-red-800 selection:text-amber-50">
+
+  <!-- ==================== FLOATING TOP TRANSPARENT ARTISTIC HEADER ==================== -->
+  <header class="fixed top-0 inset-x-0 z-50 pointer-events-none">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 py-4 flex items-center justify-between">
+      <!-- Brand Identity -->
+      <a href="#stage-top" id="brandTopLink" class="pointer-events-auto flex items-center gap-3 group backdrop-blur-md bg-[#F6F0E4]/75 dark:bg-stone-950/70 px-4 py-2 rounded-full border border-red-900/15 shadow-sm">
+        <span class="cinnabar-seal w-7 h-7 rounded-sm flex items-center justify-center font-serif-cn text-xs font-bold">生花</span>
+        <div>
+          <span class="font-serif-cn text-lg font-bold tracking-widest">纸上生花</span>
+          <span class="hidden sm:inline-block text-[11px] opacity-65 ml-2 border-l border-current pl-2">纸间光影 · 一刀万象</span>
+        </div>
+      </a>
+
+      <!-- Minimalist Floating Theater Controls (Atmosphere, Dye, Sound, Quick Portal Jump) -->
+      <div class="pointer-events-auto flex items-center gap-2 backdrop-blur-md bg-[#F6F0E4]/80 dark:bg-stone-950/75 px-3 py-1.5 rounded-full border border-red-900/15 shadow-sm">
+        <!-- 4 Paper Color Dots -->
+        <div class="flex items-center gap-1.5 pr-2 border-r border-red-900/15" title="切换全局纸雕染制色彩">
+          <button type="button" data-dye="#B81D18" data-dye-dark="#7F110E" data-dye-name="朱砂正红" class="dye-dot w-4 h-4 rounded-full bg-[#B81D18] ring-2 ring-offset-1 ring-red-700 transition-transform hover:scale-125" aria-label="朱砂正红"></button>
+          <button type="button" data-dye="#C84B15" data-dye-dark="#8A2E08" data-dye-name="丹柿流霞" class="dye-dot w-4 h-4 rounded-full bg-[#C84B15] opacity-75 hover:opacity-100 transition-transform hover:scale-125" aria-label="丹柿流霞"></button>
+          <button type="button" data-dye="#B67E16" data-dye-dark="#785008" data-dye-name="泥金宫黄" class="dye-dot w-4 h-4 rounded-full bg-[#B67E16] opacity-75 hover:opacity-100 transition-transform hover:scale-125" aria-label="泥金宫黄"></button>
+          <button type="button" data-dye="#1B4965" data-dye-dark="#0F2C3E" data-dye-name="青花黛蓝" class="dye-dot w-4 h-4 rounded-full bg-[#1B4965] opacity-75 hover:opacity-100 transition-transform hover:scale-125" aria-label="青花黛蓝"></button>
+        </div>
+
+        <!-- Day / Night Candlelight Switch -->
+        <button type="button" id="lanternToggleBtn" class="px-2.5 py-1 rounded-full text-xs font-medium hover:bg-red-800/10 flex items-center gap-1 transition-colors">
+          <span id="lanternIcon">🕯️</span>
+          <span id="lanternText" class="hidden md:inline">燃烛透光</span>
+        </button>
+
+        <!-- Sound Effect Switch -->
+        <button type="button" id="chimeToggleBtn" class="px-2 py-1 rounded-full text-xs font-medium hover:bg-red-800/10 flex items-center gap-1 transition-colors" title="纸韵空灵音效">
+          <span id="chimeIcon">🔊</span>
+        </button>
+
+        <!-- Scroll to Portals -->
+        <button type="button" id="jumpPortalsBtn" class="px-3 py-1 rounded-full text-xs font-serif-cn font-semibold bg-[#B81D18] text-amber-50 hover:opacity-90 transition-opacity">
+          寻窗入画 ↓
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== ACT I: FUSION OF SCHEME A & B — THE 2.5D UNFOLDING PAPER-CUT THEATER ==================== -->
+  <section id="stage-top" class="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden pt-20 pb-16">
+
+    <!-- LAYER 1 (FAR BACKGROUND): Mist, Auspicious Clouds & Distant Paper-Cut Mountains -->
+    <div id="parallaxFar" class="pointer-events-none absolute inset-0 flex flex-col justify-between overflow-hidden paper-layer-far">
+      <!-- Top Cloud Valance (天幕流云纸雕) -->
+      <svg class="w-full h-36 sm:h-48 preserve-3d opacity-30" viewBox="0 0 1440 200" preserveAspectRatio="none">
+        <path class="paper-fill-secondary" fill="#8E120E" d="M0,0 L1440,0 L1440,95 C1320,145 1210,60 1080,110 C950,160 820,50 720,120 C620,50 490,160 360,110 C230,60 120,145 0,95 Z"/>
+      </svg>
+
+      <!-- Bottom Distant Paper Mountains (远山重峦叠嶂) -->
+      <svg class="w-full h-44 sm:h-64 opacity-25" viewBox="0 0 1440 320" preserveAspectRatio="none">
+        <path class="paper-fill-secondary" fill="#8E120E" d="M0,224 C180,140 320,260 480,192 C640,124 780,80 960,160 C1140,240 1300,120 1440,176 L1440,320 L0,320 Z"/>
+      </svg>
+    </div>
+
+    <!-- LAYER 2 (LEFT & RIGHT THEATER CURTAINS): Parting Symmetrical Paper-Cut Pine, Peony & Swallow Curtains -->
+    <div id="curtainLeft" class="pointer-events-none absolute inset-y-0 left-0 w-1/3 sm:w-2/5 flex items-center justify-start paper-layer-mid transition-transform duration-500 ease-out">
+      <svg class="h-[88%] w-auto max-w-full -ml-6 sm:-ml-2 opacity-90" viewBox="0 0 360 800" fill="none">
+        <!-- Ornate Left Paper-Cut Frame Curtain with Hollow Peonies & Swallows -->
+        <path class="paper-fill-main" fill="#B81D18" fill-rule="evenodd" d="
+          M0,0 L260,0
+          C210,90 150,140 165,240
+          C180,340 245,390 190,490
+          C135,590 195,680 280,800
+          L0,800 Z
+          M55,110 C85,90 125,110 115,150 C105,190 65,180 55,110 Z
+          M40,260 C95,230 135,275 105,335 C75,395 25,330 40,260 Z
+          M75,450 C120,435 155,470 130,520 C105,570 55,510 75,450 Z
+          M45,620 C90,605 130,645 105,695 C80,745 30,680 45,620 Z
+        "/>
+        <!-- Fine Gold Filigree Accent Line -->
+        <path stroke="#D4AF37" stroke-width="1.5" stroke-dasharray="6 6" opacity="0.65" d="M225,0 C175,95 125,150 140,245 C155,340 215,395 160,495 C105,595 165,685 245,800"/>
+      </svg>
+    </div>
+
+    <div id="curtainRight" class="pointer-events-none absolute inset-y-0 right-0 w-1/3 sm:w-2/5 flex items-center justify-end paper-layer-mid transition-transform duration-500 ease-out">
+      <svg class="h-[88%] w-auto max-w-full -mr-6 sm:-mr-2 opacity-90 scale-x-[-1]" viewBox="0 0 360 800" fill="none">
+        <path class="paper-fill-main" fill="#B81D18" fill-rule="evenodd" d="
+          M0,0 L260,0
+          C210,90 150,140 165,240
+          C180,340 245,390 190,490
+          C135,590 195,680 280,800
+          L0,800 Z
+          M55,110 C85,90 125,110 115,150 C105,190 65,180 55,110 Z
+          M40,260 C95,230 135,275 105,335 C75,395 25,330 40,260 Z
+          M75,450 C120,435 155,470 130,520 C105,570 55,510 75,450 Z
+          M45,620 C90,605 130,645 105,695 C80,745 30,680 45,620 Z
+        "/>
+        <path stroke="#D4AF37" stroke-width="1.5" stroke-dasharray="6 6" opacity="0.65" d="M225,0 C175,95 125,150 140,245 C155,340 215,395 160,495 C105,595 165,685 245,800"/>
+      </svg>
+    </div>
+
+    <!-- LAYER 3 (CENTER HERO): THE LIVING 2.5D UNFOLDING MANDALA STAGE (一折万象 · 纸雕光影心印) -->
+    <div class="relative z-20 max-w-6xl mx-auto px-4 w-full flex flex-col items-center">
+
+      <!-- Classical Vertical Poetic Overlays on Left & Right of the Mandala -->
+      <div class="hidden lg:flex items-center gap-3 absolute left-6 top-1/2 -translate-y-1/2 select-none">
+        <div class="vertical-rl font-serif-cn text-xs tracking-[0.5em] opacity-60 border-r border-red-900/20 pr-2 py-4">
+          一折尺素藏天地 · 镂月裁云见东方
+        </div>
+        <div class="vertical-rl font-serif-cn text-2xl font-bold tracking-[0.35em] text-[#B81D18] dark:text-amber-400">
+          纸间光影
+        </div>
+      </div>
+
+      <div class="hidden lg:flex items-center gap-3 absolute right-6 top-1/2 -translate-y-1/2 select-none">
+        <div class="vertical-rl font-serif-cn text-2xl font-bold tracking-[0.35em] text-[#B81D18] dark:text-amber-400">
+          一刀万象
+        </div>
+        <div class="vertical-rl font-serif-cn text-xs tracking-[0.5em] opacity-60 border-l border-red-900/20 pl-2 py-4">
+          千刀不断生万象 · 虚实相生透轩窗
+        </div>
+      </div>
+
+      <!-- Top Floating Poetic Subtitle -->
+      <div class="text-center mb-3 sm:mb-5 space-y-1.5">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-red-900/10 dark:bg-amber-500/15 border border-red-900/20 text-[11px] sm:text-xs tracking-widest font-serif-cn">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#B81D18] animate-ping"></span>
+          <span id="stageMoodText">移动鼠标如提灯映纸 · 点击花窗绽放新的对称花纹</span>
+        </div>
+        <h1 class="font-serif-cn text-4xl sm:text-6xl lg:text-7xl font-black tracking-[0.18em] pl-[0.18em] drop-shadow-sm">
+          纸上生花
+        </h1>
+      </div>
+
+      <!-- THE CENTRAL INTERACTIVE 2.5D MANDALA LANTERN STAGE -->
+      <div id="mandalaStageWrap" class="relative w-[310px] h-[310px] sm:w-[450px] sm:h-[450px] lg:w-[510px] lg:h-[510px] flex items-center justify-center cursor-pointer select-none group">
+
+        <!-- Backlight Halo Ring -->
+        <div id="mandalaHalo" class="absolute inset-6 rounded-full portal-inner-glow transition-transform duration-700 group-hover:scale-105"></div>
+
+        <!-- Outer Rotating Golden Filigree Ring -->
+        <svg class="absolute inset-2 w-[calc(100%-16px)] h-[calc(100%-16px)] pointer-events-none opacity-55 animate-[spin_70s_linear_infinite]" viewBox="0 0 500 500" fill="none">
+          <circle cx="250" cy="250" r="236" stroke="#D4AF37" stroke-width="1.2" stroke-dasharray="3 8"/>
+          <circle cx="250" cy="250" r="222" stroke="#B81D18" stroke-width="1" stroke-dasharray="12 6"/>
+        </svg>
+
+        <!-- 3D Tilt Container for the Multi-Layer Paper-Cut Canvas -->
+        <div id="mandalaTiltBox" class="relative w-[92%] h-[92%] flex items-center justify-center paper-layer-near">
+          <canvas id="heroMandalaCanvas" width="640" height="640" class="w-full h-full max-w-full h-auto"></canvas>
+        </div>
+
+        <!-- Floating Interactive Ripple Hint Pill at Bottom of Mandala -->
+        <div class="absolute -bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap px-4 py-1.5 rounded-full bg-stone-900/85 text-amber-50 text-xs font-serif-cn tracking-wider shadow-lg border border-amber-400/30 flex items-center gap-2">
+          <span id="unfoldStateLabel">十六重对称全展态</span>
+          <span class="opacity-40">|</span>
+          <span class="text-amber-300">轻触花心 · 幻化万象纹样</span>
+        </div>
+      </div>
+
+      <!-- Interactive Unfolding & Symmetry Ritual Scrubber (融合方案A与B的核心控制器) -->
+      <div class="mt-8 sm:mt-10 w-full max-w-xl backdrop-blur-md bg-white/65 dark:bg-stone-900/75 px-5 py-3.5 rounded-full border border-red-900/15 shadow-lg flex flex-wrap items-center justify-between gap-3">
+        <button type="button" id="ritualFoldBtn" class="px-3.5 py-1.5 rounded-full bg-[#B81D18] text-amber-50 text-xs font-serif-cn font-semibold tracking-wider hover:opacity-90 transition-all shrink-0">
+          ✨ 演武：一折生万象
+        </button>
+
+        <div class="flex items-center gap-2.5 flex-1 min-w-[160px]">
+          <span class="text-[11px] font-serif-cn opacity-70 shrink-0">折角</span>
+          <input id="unfoldSlider" type="range" min="6" max="100" value="100" class="w-full accent-[#B81D18] cursor-pointer h-1.5 rounded-lg" aria-label="折纸展开进度" />
+          <span class="text-[11px] font-serif-cn opacity-70 shrink-0">满窗</span>
+        </div>
+
+        <div class="flex items-center gap-1 shrink-0">
+          <button type="button" data-mandala-sym="4" class="sym-pill px-2.5 py-1 rounded-full text-xs font-serif-cn hover:bg-red-800/10">四瓣</button>
+          <button type="button" data-mandala-sym="6" class="sym-pill px-2.5 py-1 rounded-full text-xs font-serif-cn hover:bg-red-800/10">六瓣</button>
+          <button type="button" data-mandala-sym="8" class="sym-pill px-2.5 py-1 rounded-full text-xs font-serif-cn bg-red-800/15 text-[#B81D18] dark:text-amber-300 font-bold">八瓣</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== ACT II: NON-LINEAR SCROLLING PAPER-CUT RIVER & ARCHITECTURAL WINDOW PORTALS ==================== -->
+  <!-- Instead of parallel boxy modules, a flowing crimson silk & paper-cut scroll connects organic Chinese window silhouettes -->
+  <section id="stage-portals" class="relative py-16 sm:py-28 overflow-hidden">
+
+    <!-- Flowing Crimson Paper-Cut Ribbon River (贯穿全场的非对称剪纸流云长卷背衬) -->
+    <svg class="pointer-events-none absolute inset-x-0 top-0 w-full h-full opacity-20 dark:opacity-25" viewBox="0 0 1200 1800" preserveAspectRatio="none" fill="none">
+      <path class="paper-fill-stroke" d="M600,0 C980,260 220,580 650,900 C1050,1200 260,1500 600,1800" stroke="#B81D18" stroke-width="48" stroke-linecap="round" stroke-dasharray="2 18"/>
+      <path class="paper-fill-stroke" d="M600,0 C980,260 220,580 650,900 C1050,1200 260,1500 600,1800" stroke="#B81D18" stroke-width="6"/>
+      <path d="M600,0 C980,260 220,580 650,900 C1050,1200 260,1500 600,1800" stroke="#D4AF37" stroke-width="2" stroke-dasharray="10 10"/>
+    </svg>
+
+    <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Poetic Section Lead (No Rectangular Box!) -->
+      <div class="text-center max-w-2xl mx-auto mb-16 sm:mb-24 space-y-3">
+        <div class="inline-block cinnabar-seal px-2.5 py-0.5 text-xs font-serif-cn">游园惊梦 · 移步换景</div>
+        <h2 class="font-serif-cn text-3xl sm:text-5xl font-black tracking-wider">
+          推开六扇花窗，步入纸间天地
+        </h2>
+        <p class="text-xs sm:text-sm opacity-75 leading-relaxed">
+          打破传统平行网格，以古典园林「满月、海棠、折扇、六角、冰裂、葫芦」六式漏窗承载现有模块与未来扩展空间。悬停提灯透影，轻触即入对应轩馆。
+        </p>
+      </div>
+
+      <!-- STAGGERED ASYMMETRICAL GARDEN WINDOW PORTALS (移步换景非对称漏窗长卷) -->
+      <div id="portalsStaggeredContainer" class="space-y-16 sm:space-y-24">
+        <!-- Populated dynamically from state.portals so new future modules integrate organically -->
+      </div>
+
+      <!-- Add Future Module Slot Trigger (满足“我们后面也会加一些新的模块”的可生长轩窗机制) -->
+      <div class="mt-20 flex flex-col items-center justify-center text-center space-y-4">
+        <div class="w-px h-16 bg-gradient-to-b from-[#B81D18] to-transparent"></div>
+        <button type="button" id="openAddModuleModalBtn" class="group relative px-7 py-4 rounded-full backdrop-blur-md bg-white/75 dark:bg-stone-900/80 border-2 border-dashed border-[#B81D18]/50 hover:border-[#B81D18] shadow-xl flex items-center gap-3 transition-all hover:scale-105">
+          <span class="w-8 h-8 rounded-full bg-[#B81D18] text-amber-50 flex items-center justify-center font-bold text-lg group-hover:rotate-90 transition-transform">+</span>
+          <div class="text-left">
+            <div class="font-serif-cn font-bold text-sm sm:text-base">在长卷中开辟新花窗（挂载后续新模块）</div>
+            <div class="text-[11px] opacity-70">预设支持海棠窗、八角窗、折扇窗等非遗器型，随时接入新页面路由</div>
+          </div>
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== PORTAL IMMERSIVE PREVIEW / ROUTE TRANSITION MODAL ==================== -->
+  <div id="portalPreviewModal" class="fixed inset-0 z-50 hidden bg-stone-950/75 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="relative w-full max-w-lg rounded-3xl bg-[#F6F0E4] dark:bg-[#1A1210] border-2 border-[#B81D18]/40 shadow-2xl p-6 sm:p-8 overflow-hidden">
+      <button type="button" id="closePortalModalBtn" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-red-900/10 hover:bg-red-900/20 flex items-center justify-center text-sm font-bold">✕</button>
+
+      <div class="flex items-center gap-3 mb-4">
+        <span id="modalWindowShapeBadge" class="cinnabar-seal px-2.5 py-0.5 text-xs font-serif-cn">满月圆窗</span>
+        <span id="modalStatusBadge" class="text-xs px-2.5 py-0.5 rounded-full bg-emerald-700/15 text-emerald-800 dark:text-emerald-300 font-medium">已上线模块</span>
+      </div>
+
+      <h3 id="modalTitle" class="font-serif-cn text-2xl sm:text-3xl font-black">剪纸工坊</h3>
+      <p id="modalSubtitle" class="font-serif-cn text-sm text-[#B81D18] dark:text-amber-400 mt-1">一折一剪 · 对称生成与连通检测核心舞台</p>
+      <p id="modalDesc" class="text-xs sm:text-sm opacity-80 leading-relaxed mt-3"></p>
+
+      <div class="mt-5 p-3.5 rounded-2xl bg-amber-950/5 dark:bg-white/5 border border-red-900/15 flex items-center justify-between text-xs">
+        <span class="opacity-70">绑定前端路由 / 页面路径：</span>
+        <code id="modalRoutePath" class="font-mono font-bold text-[#B81D18] dark:text-amber-300">/workshop</code>
+      </div>
+
+      <div class="mt-6 flex flex-wrap items-center justify-end gap-3">
+        <button type="button" id="modalCloseSecondaryBtn" class="px-4 py-2 rounded-full border border-red-900/20 text-xs font-medium hover:bg-red-900/5">返回长卷</button>
+        <a id="modalOnlineLink" href="https://zhishang-shenghua-papercut.tendertapir.chatgpt.site" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-full bg-[#B81D18] text-amber-50 text-xs font-serif-cn font-semibold tracking-wider hover:opacity-90 shadow-md">
+          步入此轩窗 →
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== ADD NEW FUTURE MODULE WINDOW MODAL ==================== -->
+  <div id="addModuleModal" class="fixed inset-0 z-50 hidden bg-stone-950/75 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="relative w-full max-w-md rounded-3xl bg-[#F6F0E4] dark:bg-[#1A1210] border-2 border-[#B81D18]/40 shadow-2xl p-6 sm:p-8 space-y-4">
+      <div class="flex items-center justify-between">
+        <h3 class="font-serif-cn text-xl font-bold">开辟新花窗 · 接入后续新模块</h3>
+        <button type="button" id="closeAddModuleBtn" class="w-8 h-8 rounded-full bg-red-900/10 flex items-center justify-center text-sm font-bold">✕</button>
+      </div>
+      <p class="text-xs opacity-75">输入你们后续计划新增的模块名称与意境描述，首页长卷会自动生成一扇对应的古典漏窗入口：</p>
+
+      <div class="space-y-3">
+        <div>
+          <label class="text-xs font-semibold block mb-1">新模块名称</label>
+          <input id="newModTitle" type="text" value="光影皮影戏台" class="w-full px-3.5 py-2 rounded-xl bg-white/80 dark:bg-stone-900 border border-red-900/20 text-xs focus:outline-none" />
+        </div>
+        <div>
+          <label class="text-xs font-semibold block mb-1">诗意副标题</label>
+          <input id="newModSub" type="text" value="双手提偶 · 赋予静态剪纸动态叙事生命" class="w-full px-3.5 py-2 rounded-xl bg-white/80 dark:bg-stone-900 border border-red-900/20 text-xs focus:outline-none" />
+        </div>
+        <div>
+          <label class="text-xs font-semibold block mb-1">漏窗器型选择</label>
+          <select id="newModShape" class="w-full px-3.5 py-2 rounded-xl bg-white/80 dark:bg-stone-900 border border-red-900/20 text-xs focus:outline-none">
+            <option value="begonia">海棠花窗（柔美曲瓣）</option>
+            <option value="octagon">八角景窗（端方古雅）</option>
+            <option value="moon">满月圆窗（团圆通透）</option>
+            <option value="leaf">蕉叶轩窗（写意灵动）</option>
+          </select>
+        </div>
+        <div>
+          <label class="text-xs font-semibold block mb-1">目标路由路径</label>
+          <input id="newModRoute" type="text" value="/shadow-theater" class="w-full px-3.5 py-2 rounded-xl bg-white/80 dark:bg-stone-900 border border-red-900/20 text-xs font-mono focus:outline-none" />
+        </div>
+      </div>
+
+      <div class="pt-2 flex justify-end gap-2">
+        <button type="button" id="cancelAddModuleBtn" class="px-4 py-2 rounded-full border border-red-900/20 text-xs">取消</button>
+        <button type="button" id="confirmAddModuleBtn" class="px-5 py-2 rounded-full bg-[#B81D18] text-amber-50 text-xs font-serif-cn font-semibold">生成花窗入口</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="theaterToast" class="fixed bottom-5 right-5 z-50 hidden px-4 py-2.5 rounded-full bg-stone-900/90 text-amber-50 text-xs font-serif-cn tracking-wider shadow-xl border border-amber-400/30">
+    <span id="theaterToastText"></span>
+  </div>
+
+  <!-- Minimal Poetic Colophon Footer -->
+  <footer class="relative z-10 border-t border-red-900/10 py-8 text-center text-xs opacity-65 font-serif-cn tracking-widest">
+    <p>纸上生花 · 2026年第十四届全国大学生数字媒体科技作品及创意竞赛参赛作品</p>
+  </footer>
+
+  <script>
+    // ==================== THEATER STATE ====================
+    const state = {
+      paperColor: '#B81D18',
+      paperDark: '#7F110E',
+      paperName: '朱砂正红',
+      lanternNight: false,
+      soundOn: true,
+
+      // Central Mandala State (Fusing Scheme A & B)
+      symPetals: 8,
+      unfoldRatio: 1.0, // 0.06 (single folded wedge) -> 1.0 (full 360 mandala)
+      patternSeed: 0,
+      rotationAngle: 0,
+
+      // Preset Intricate Mandala Motif Variations (Clicking the mandala morphs between these exquisite patterns!)
+      mandalaPresets: [
+        {
+          name: '百鸟朝凤 · 十六重团花',
+          rings: [
+            { r: 0.16, type: 'lotus', size: 22, countMul: 1 },
+            { r: 0.34, type: 'willowPair', size: 32, countMul: 1 },
+            { r: 0.54, type: 'swallow', size: 36, countMul: 1 },
+            { r: 0.74, type: 'peony', size: 28, countMul: 2 },
+            { r: 0.88, type: 'pearl', size: 11, countMul: 3 }
+          ]
+        },
+        {
+          name: '瑞雪迎春 · 冰裂纹窗花',
+          rings: [
+            { r: 0.18, type: 'pearl', size: 18, countMul: 1 },
+            { r: 0.38, type: 'sawtooth', size: 34, countMul: 1 },
+            { r: 0.58, type: 'lotus', size: 38, countMul: 1 },
+            { r: 0.77, type: 'willowPair', size: 26, countMul: 2 },
+            { r: 0.89, type: 'sawtooth', size: 14, countMul: 3 }
+          ]
+        },
+        {
+          name: '连年有余 · 游鱼戏莲纹',
+          rings: [
+            { r: 0.15, type: 'lotus', size: 20, countMul: 1 },
+            { r: 0.36, type: 'swallow', size: 34, countMul: 1 },
+            { r: 0.57, type: 'willowPair', size: 36, countMul: 1 },
+            { r: 0.76, type: 'lotus', size: 28, countMul: 2 },
+            { r: 0.88, type: 'pearl', size: 12, countMul: 2 }
+          ]
+        }
+      ],
+
+      // Non-Parallel Staggered Architectural Window Portals (3 Existing + Extensible Future Modules)
+      portals: [
+        {
+          id: 'p-workshop',
+          number: '壹',
+          windowType: 'moon',
+          windowLabel: '满月圆窗',
+          status: '核心已上线模块',
+          title: '剪纸工坊',
+          subtitle: '指尖落刀 · 对称造物与千刀不断连通审验',
+          poeticDesc: '步入满月轩窗，在四瓣、六瓣、八瓣折纸间自由裁云镂月，系统以泥金高亮实时守护纸张筋骨不断。',
+          route: '/workshop',
+          motif: 'mandala'
+        },
+        {
+          id: 'p-inspiration',
+          number: '贰',
+          windowType: 'begonia',
+          windowLabel: '海棠花窗',
+          status: '核心已上线模块',
+          title: '纹样灵感',
+          subtitle: '寻脉千载 · 传统民俗吉祥母题基因库',
+          poeticDesc: '透过曲瓣海棠花窗，饱览团花瑞雪、松鹤延年、吉庆方胜等经典非遗纹样谱系，一键载入画案临摹再造。',
+          route: '/inspiration',
+          motif: 'flora'
+        },
+        {
+          id: 'p-works',
+          number: '叁',
+          windowType: 'fan',
+          windowLabel: '折扇轩窗',
+          status: '核心已上线模块',
+          title: '我的作品',
+          subtitle: '藏珍于匣 · 实景贴窗光影预览与矢量珍藏',
+          poeticDesc: '展开折扇轩窗，将亲手裁就的窗花映于古宅木棂或现代晴窗之上，支持草稿回溯与 SVG/PNG 无损导出。',
+          route: '/works',
+          motif: 'phoenix'
+        },
+        {
+          id: 'p-future-1',
+          number: '肆',
+          windowType: 'octagon',
+          windowLabel: '八角景窗',
+          status: '预留拓展模块 · 可直接挂载',
+          title: '九州流派长卷',
+          subtitle: '山河寻踪 · 南北非遗剪纸地域风格数字地图',
+          poeticDesc: '自山东高密金石刚劲之风，至江南扬州纤巧灵秀之韵，以交互视差地图串联中华剪纸千年流变。',
+          route: '/heritage-map',
+          motif: 'mountain'
+        },
+        {
+          id: 'p-future-2',
+          number: '伍',
+          windowType: 'leaf',
+          windowLabel: '蕉叶轩窗',
+          status: '预留拓展模块 · 可直接挂载',
+          title: '灵犀文创造物',
+          subtitle: '器以载道 · 窗花光影投射与东方生活美学衍生',
+          poeticDesc: '将镂空纹样实时映射至灯彩、团扇、丝巾与节气礼盒之上，让非遗剪纸走出纸面、步入日常起居。',
+          route: '/cultural-craft',
+          motif: 'lantern'
+        }
+      ]
+    };
+
+    // ==================== ETHEREAL PENTATONIC CHIME & PAPER SOUND (Web Audio API) ====================
+    let audioCtx = null;
+    const pentatonicFreqs = [523.25, 587.33, 659.25, 783.99, 880.0, 1046.5];
+    function playPaperChime(idx = 0) {
+      if (!state.soundOn) return;
+      try {
+        if (!audioCtx) {
+          const AC = window.AudioContext || window.webkitAudioContext;
+          if (AC) audioCtx = new AC();
+        }
+        if (!audioCtx) return;
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+
+        const now = audioCtx.currentTime;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        const freq = pentatonicFreqs[idx % pentatonicFreqs.length];
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, now);
+        osc.frequency.exponentialRampToValueAtTime(freq * 0.995, now + 0.45);
+
+        gain.gain.setValueAtTime(0.09, now);
+        gain.gain.exponentialRampToValueAtTime(0.0008, now + 0.45);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(now);
+        osc.stop(now + 0.46);
+      } catch (e) {}
+    }
+
+    let toastTimeout = null;
+    function showToast(text) {
+      const box = document.getElementById('theaterToast');
+      const span = document.getElementById('theaterToastText');
+      if (!box || !span) return;
+      span.textContent = text;
+      box.classList.remove('hidden');
+      if (toastTimeout) clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => box.classList.add('hidden'), 2600);
+    }
+
+    // ==================== INTRICATE 2.5D MANDALA CANVAS RENDERER ====================
+    function drawIntricateMandala() {
+      const canvas = document.getElementById('heroMandalaCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const w = canvas.width;
+      const h = canvas.height;
+      const cx = w / 2;
+      const cy = h / 2;
+      const R = w * 0.44;
+
+      ctx.clearRect(0, 0, w, h);
+
+      // Offscreen buffer for true paper cutout boolean carving
+      const off = document.createElement('canvas');
+      off.width = w;
+      off.height = h;
+      const octx = off.getContext('2d');
+
+      const petals = state.symPetals;
+      const totalSectors = petals * 2;
+      const sectorAngle = (Math.PI * 2) / totalSectors;
+      const activeSectors = Math.max(1, Math.round(1 + (totalSectors - 1) * state.unfoldRatio));
+      const preset = state.mandalaPresets[state.patternSeed % state.mandalaPresets.length];
+
+      octx.save();
+      octx.translate(cx, cy);
+      octx.rotate(state.rotationAngle);
+
+      // 1. Draw Base Paper Silhouette (Folded Fan or Full Floral Scallop Medallion)
+      octx.fillStyle = state.paperColor;
+      octx.beginPath();
+      if (state.unfoldRatio < 0.99) {
+        const span = activeSectors * sectorAngle;
+        octx.moveTo(0, 0);
+        octx.arc(0, 0, R, -Math.PI / 2, -Math.PI / 2 + span);
+        octx.closePath();
+      } else {
+        const lobes = petals * 4;
+        for (let i = 0; i <= 360; i++) {
+          const rad = (i * Math.PI) / 180;
+          const rWave = R * (0.95 + 0.05 * Math.cos(lobes * rad));
+          const x = rWave * Math.cos(rad);
+          const y = rWave * Math.sin(rad);
+          if (i === 0) octx.moveTo(x, y);
+          else octx.lineTo(x, y);
+        }
+        octx.closePath();
+      }
+      octx.fill();
+
+      // 2. Carve Intricate Traditional Paper-Cut Motifs Using destination-out
+      octx.globalCompositeOperation = 'destination-out';
+      octx.fillStyle = '#000';
+
+      // Center core star cutout
+      octx.beginPath();
+      octx.arc(0, 0, R * 0.06, 0, Math.PI * 2);
+      octx.fill();
+
+      for (let s = 0; s < activeSectors; s++) {
+        octx.save();
+        const baseA = -Math.PI / 2 + s * sectorAngle;
+        octx.rotate(baseA);
+        if (s % 2 === 1) {
+          octx.rotate(sectorAngle);
+          octx.scale(1, -1);
+        }
+
+        preset.rings.forEach((ring) => {
+          const dist = ring.r * R;
+          const sz = ring.size;
+          const subCount = ring.countMul || 1;
+
+          for (let k = 0; k < subCount; k++) {
+            const frac = (k + 0.5) / subCount;
+            const ang = frac * sectorAngle * 0.85;
+            const px = dist * Math.cos(ang);
+            const py = dist * Math.sin(ang);
+
+            octx.save();
+            octx.translate(px, py);
+            octx.rotate(ang);
+
+            octx.beginPath();
+            if (ring.type === 'lotus') {
+              octx.moveTo(-sz, 0);
+              octx.bezierCurveTo(-sz * 0.3, -sz * 0.65, sz * 0.3, -sz * 0.65, sz, 0);
+              octx.bezierCurveTo(sz * 0.3, sz * 0.65, -sz * 0.3, sz * 0.65, -sz, 0);
+            } else if (ring.type === 'willowPair') {
+              octx.moveTo(-sz * 0.9, -4);
+              octx.quadraticCurveTo(0, -sz * 0.55, sz * 0.9, -4);
+              octx.quadraticCurveTo(0, -2, -sz * 0.9, -4);
+            } else if (ring.type === 'swallow') {
+              octx.moveTo(-sz * 0.8, 0);
+              octx.quadraticCurveTo(-sz * 0.1, -sz * 0.7, sz * 0.85, -sz * 0.35);
+              octx.quadraticCurveTo(sz * 0.2, 0, sz * 0.85, sz * 0.35);
+              octx.quadraticCurveTo(-sz * 0.1, sz * 0.7, -sz * 0.8, 0);
+            } else if (ring.type === 'peony') {
+              octx.arc(0, 0, sz * 0.42, 0, Math.PI * 2);
+            } else if (ring.type === 'sawtooth') {
+              octx.moveTo(-sz * 0.75, -sz * 0.38);
+              octx.lineTo(sz * 0.75, 0);
+              octx.lineTo(-sz * 0.75, sz * 0.38);
+              octx.closePath();
+            } else {
+              octx.arc(0, 0, sz * 0.48, 0, Math.PI * 2);
+            }
+            octx.fill();
+            octx.restore();
+          }
+        });
+
+        octx.restore();
+      }
+
+      // 3. Add Delicate Gold Foil Rim Highlights When Unfolded
+      octx.globalCompositeOperation = 'source-atop';
+      octx.strokeStyle = 'rgba(212, 175, 55, 0.48)';
+      octx.lineWidth = 2.2;
+      octx.beginPath();
+      octx.arc(0, 0, R * 0.47, 0, Math.PI * 2);
+      octx.stroke();
+      octx.beginPath();
+      octx.arc(0, 0, R * 0.82, 0, Math.PI * 2);
+      octx.stroke();
+
+      octx.restore();
+      ctx.drawImage(off, 0, 0);
+    }
+
+    // ==================== ARCHITECTURAL WINDOW PORTALS RENDERER (非平行园林漏窗长卷) ====================
+    function buildWindowMotifSvg(motif, color) {
+      if (motif === 'mandala') {
+        return `
+          <svg viewBox="0 0 200 200" class="w-40 h-40 sm:w-48 sm:h-48 paper-layer-mid group-hover:rotate-12 transition-transform duration-700">
+            <circle cx="100" cy="100" r="84" fill="${color}" />
+            <g fill="#F6F0E4">
+              <circle cx="100" cy="100" r="14"/>
+              <path d="M100 22 Q112 52 100 76 Q88 52 100 22 Z"/>
+              <path d="M100 178 Q112 148 100 124 Q88 148 100 178 Z"/>
+              <path d="M22 100 Q52 112 76 100 Q52 88 22 100 Z"/>
+              <path d="M178 100 Q148 112 124 100 Q148 88 178 100 Z"/>
+              <path d="M45 45 Q72 62 82 82 Q62 72 45 45 Z"/>
+              <path d="M155 155 Q128 138 118 118 Q138 128 155 155 Z"/>
+              <path d="M155 45 Q138 72 118 82 Q128 62 155 45 Z"/>
+              <path d="M45 155 Q62 128 82 118 Q72 138 45 155 Z"/>
+            </g>
+          </svg>`;
+      }
+      if (motif === 'flora') {
+        return `
+          <svg viewBox="0 0 200 200" class="w-40 h-40 sm:w-48 sm:h-48 paper-layer-mid group-hover:scale-110 transition-transform duration-700">
+            <path d="M100 16 C145 16 184 55 184 100 C184 145 145 184 100 184 C55 184 16 145 16 100 C16 55 55 16 100 16 Z" fill="${color}"/>
+            <g fill="#F6F0E4">
+              <circle cx="100" cy="100" r="18"/>
+              <path d="M100 26 C118 48 118 68 100 78 C82 68 82 48 100 26 Z"/>
+              <path d="M100 174 C118 152 118 132 100 122 C82 132 82 152 100 174 Z"/>
+              <path d="M26 100 C48 118 68 118 78 100 C68 82 48 82 26 100 Z"/>
+              <path d="M174 100 C152 118 132 118 122 100 C132 82 152 82 174 100 Z"/>
+              <circle cx="62" cy="62" r="9"/><circle cx="138" cy="62" r="9"/>
+              <circle cx="62" cy="138" r="9"/><circle cx="138" cy="138" r="9"/>
+            </g>
+          </svg>`;
+      }
+      return `
+        <svg viewBox="0 0 200 200" class="w-40 h-40 sm:w-48 sm:h-48 paper-layer-mid group-hover:-rotate-6 transition-transform duration-700">
+          <polygon points="100,14 160,38 186,100 160,162 100,186 40,162 14,100 40,38" fill="${color}"/>
+          <g fill="#F6F0E4">
+            <polygon points="100,42 116,84 158,100 116,116 100,158 84,116 42,100 84,84"/>
+            <circle cx="100" cy="100" r="10" fill="${color}"/>
+          </g>
+        </svg>`;
+    }
+
+    function renderStaggeredPortals() {
+      const container = document.getElementById('portalsStaggeredContainer');
+      if (!container) return;
+
+      const shapeClassMap = {
+        moon: 'portal-moon',
+        begonia: 'portal-begonia',
+        fan: 'portal-fan',
+        octagon: 'portal-octagon',
+        leaf: 'portal-leaf'
+      };
+
+      container.innerHTML = state.portals.map((p, idx) => {
+        const isEven = idx % 2 === 0;
+        const shapeCls = shapeClassMap[p.windowType] || 'portal-moon';
+        return `
+          <div data-portal-id="${p.id}" class="portal-entry-row cursor-pointer group flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} items-center justify-center gap-8 sm:gap-14 lg:gap-20">
+
+            <!-- Shaped Architectural Window Silhouette (非矩形园林漏窗) -->
+            <div class="window-portal-card relative w-64 h-64 sm:w-72 sm:h-72 flex items-center justify-center shrink-0">
+              <!-- Outer Lattice Frame -->
+              <div class="w-full h-full ${shapeCls} portal-inner-glow border-4 border-[#B81D18]/40 flex items-center justify-center p-6 relative overflow-hidden">
+                <!-- Subtle Traditional Lattice Crosshairs Inside Window -->
+                <div class="absolute inset-0 opacity-20 pointer-events-none border-8 border-double border-amber-900/40 ${shapeCls}"></div>
+                ${buildWindowMotifSvg(p.motif, state.paperColor)}
+              </div>
+
+              <!-- Classical Vertical Seal Number Tag -->
+              <div class="absolute -top-3 ${isEven ? '-left-3' : '-right-3'} cinnabar-seal w-10 h-10 rounded-full flex items-center justify-center font-serif-cn text-base font-bold shadow-lg">
+                ${p.number}
+              </div>
+
+              <div class="absolute -bottom-3 px-3.5 py-1 rounded-full bg-stone-900 text-amber-100 text-[11px] font-serif-cn tracking-widest shadow">
+                ${p.windowLabel}
+              </div>
+            </div>
+
+            <!-- Poetic Editorial Callout Alongside the Window -->
+            <div class="max-w-md text-center ${isEven ? 'md:text-left' : 'md:text-right'} space-y-3">
+              <div class="inline-flex items-center gap-2 text-xs font-serif-cn text-[#B81D18] dark:text-amber-400">
+                <span>${p.status}</span>
+                <span>·</span>
+                <span class="font-mono opacity-75">${p.route}</span>
+              </div>
+
+              <h3 class="font-serif-cn text-3xl sm:text-4xl font-black tracking-wide group-hover:text-[#B81D18] dark:group-hover:text-amber-300 transition-colors">
+                ${p.title}
+              </h3>
+
+              <p class="font-serif-cn text-sm sm:text-base font-semibold opacity-90">
+                「${p.subtitle}」
+              </p>
+
+              <p class="text-xs sm:text-sm opacity-75 leading-relaxed">
+                ${p.poeticDesc}
+              </p>
+
+              <div class="pt-2">
+                <span class="inline-flex items-center gap-2 text-xs font-serif-cn font-bold text-[#B81D18] dark:text-amber-300 border-b border-current pb-0.5 group-hover:tracking-widest transition-all">
+                  提灯推窗而入 →
+                </span>
+              </div>
+            </div>
+
+          </div>
+        `;
+      }).join('');
+    }
+
+    // ==================== INITIALIZATION & INTERACTION BINDINGS ====================
+    window.addEventListener('DOMContentLoaded', () => {
+      drawIntricateMandala();
+      renderStaggeredPortals();
+
+      // Gentle continuous ambient rotation for the mandala
+      let lastTick = performance.now();
+      function animateLoop(now) {
+        const dt = (now - lastTick) / 1000;
+        lastTick = now;
+        if (state.unfoldRatio >= 0.98) {
+          state.rotationAngle += dt * 0.08;
+          drawIntricateMandala();
+        }
+        requestAnimationFrame(animateLoop);
+      }
+      requestAnimationFrame(animateLoop);
+
+      // 1. Global Mouse Lantern Spotlight & 2.5D Multi-Layer Shadow Parallax (Scheme A Core)
+      window.addEventListener('mousemove', (e) => {
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+        const px = (e.clientX / vw) * 100;
+        const py = (e.clientY / vh) * 100;
+        const nx = (e.clientX / vw) - 0.5;
+        const ny = (e.clientY / vh) - 0.5;
+
+        document.documentElement.style.setProperty('--light-x', `${px.toFixed(1)}%`);
+        document.documentElement.style.setProperty('--light-y', `${py.toFixed(1)}%`);
+        document.documentElement.style.setProperty('--shadow-dx', `${(-nx * 22).toFixed(1)}px`);
+        document.documentElement.style.setProperty('--shadow-dy', `${(10 - ny * 18).toFixed(1)}px`);
+
+        const tiltBox = document.getElementById('mandalaTiltBox');
+        if (tiltBox) {
+          tiltBox.style.transform = `perspective(800px) rotateY(${(nx * 16).toFixed(2)}deg) rotateX(${(-ny * 16).toFixed(2)}deg)`;
+        }
+      });
+
+      // 2. Scroll-Driven Curtain Parting (Scrolling down parts the left & right paper-cut curtains!)
+      window.addEventListener('scroll', () => {
+        const sy = window.scrollY;
+        const maxScroll = 600;
+        const ratio = Math.min(1, Math.max(0, sy / maxScroll));
+        const leftC = document.getElementById('curtainLeft');
+        const rightC = document.getElementById('curtainRight');
+        if (leftC && rightC) {
+          leftC.style.transform = `translateX(${-ratio * 42}%)`;
+          rightC.style.transform = `translateX(${ratio * 42}%)`;
+        }
+      });
+
+      // 3. Clicking the Central Mandala Morphs the Traditional Paper-Cut Pattern + Plays Pentatonic Chime
+      document.getElementById('mandalaStageWrap').addEventListener('click', () => {
+        state.patternSeed = (state.patternSeed + 1) % state.mandalaPresets.length;
+        const currentPreset = state.mandalaPresets[state.patternSeed];
+        playPaperChime(state.patternSeed);
+        drawIntricateMandala();
+        document.getElementById('unfoldStateLabel').textContent = currentPreset.name;
+        showToast(`🌸 花窗流转：已幻化为「${currentPreset.name}」`);
+      });
+
+      // 4. Unfold Ritual Animation Button & Slider (Scheme B Core)
+      const unfoldSlider = document.getElementById('unfoldSlider');
+      unfoldSlider.addEventListener('input', () => {
+        state.unfoldRatio = Number(unfoldSlider.value) / 100;
+        document.getElementById('unfoldStateLabel').textContent =
+          state.unfoldRatio < 0.15
+            ? '一折尺素（折叠态）'
+            : state.unfoldRatio < 0.98
+              ? `逐瓣展开中 (${Math.round(state.unfoldRatio * 100)}%)`
+              : state.mandalaPresets[state.patternSeed].name;
+        drawIntricateMandala();
+      });
+
+      let ritualAnimId = null;
+      document.getElementById('ritualFoldBtn').addEventListener('click', () => {
+        if (ritualAnimId) cancelAnimationFrame(ritualAnimId);
+        playPaperChime(2);
+        state.unfoldRatio = 0.06;
+        unfoldSlider.value = '6';
+        const start = performance.now();
+        const duration = 1500;
+
+        function step(now) {
+          const t = Math.min(1, (now - start) / duration);
+          const ease = 1 - Math.pow(1 - t, 3);
+          state.unfoldRatio = 0.06 + (1 - 0.06) * ease;
+          unfoldSlider.value = String(Math.round(state.unfoldRatio * 100));
+          document.getElementById('unfoldStateLabel').textContent =
+            t < 1
+              ? `一折万象 · 逐瓣绽放 (${Math.round(state.unfoldRatio * 100)}%)`
+              : state.mandalaPresets[state.patternSeed].name;
+          drawIntricateMandala();
+          if (t < 1) ritualAnimId = requestAnimationFrame(step);
+        }
+        ritualAnimId = requestAnimationFrame(step);
+      });
+
+      // Symmetry Petals Pills (4 / 6 / 8)
+      document.querySelectorAll('.sym-pill').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          state.symPetals = Number(btn.getAttribute('data-mandala-sym'));
+          playPaperChime(4);
+          document.querySelectorAll('.sym-pill').forEach((b) => {
+            b.className = b === btn
+              ? 'sym-pill px-2.5 py-1 rounded-full text-xs font-serif-cn bg-red-800/15 text-[#B81D18] dark:text-amber-300 font-bold'
+              : 'sym-pill px-2.5 py-1 rounded-full text-xs font-serif-cn hover:bg-red-800/10';
+          });
+          drawIntricateMandala();
+          showToast(`已切换为「${state.symPetals}瓣对称折纸」花窗阵列`);
+        });
+      });
+
+      // 5. Global 4 Paper Dyes Switcher
+      document.querySelectorAll('.dye-dot').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          state.paperColor = btn.getAttribute('data-dye');
+          state.paperDark = btn.getAttribute('data-dye-dark');
+          state.paperName = btn.getAttribute('data-dye-name');
+
+          document.documentElement.style.setProperty('--paper-main', state.paperColor);
+          document.documentElement.style.setProperty('--paper-secondary', state.paperDark);
+
+          document.querySelectorAll('.paper-fill-main').forEach((el) => el.setAttribute('fill', state.paperColor));
+          document.querySelectorAll('.paper-fill-secondary').forEach((el) => el.setAttribute('fill', state.paperDark));
+          document.querySelectorAll('.paper-fill-stroke').forEach((el) => el.setAttribute('stroke', state.paperColor));
+
+          document.querySelectorAll('.dye-dot').forEach((b) => {
+            if (b === btn) {
+              b.classList.add('ring-2', 'ring-offset-1', 'ring-red-700');
+              b.classList.remove('opacity-75');
+            } else {
+              b.classList.remove('ring-2', 'ring-offset-1', 'ring-red-700');
+              b.classList.add('opacity-75');
+            }
+          });
+
+          playPaperChime(1);
+          drawIntricateMandala();
+          renderStaggeredPortals();
+          showToast(`🎨 纸韵染制：已切换为「${state.paperName}」`);
+        });
+      });
+
+      // 6. Lantern Night Mode Toggle
+      document.getElementById('lanternToggleBtn').addEventListener('click', () => {
+        state.lanternNight = !state.lanternNight;
+        document.body.classList.toggle('lantern-night', state.lanternNight);
+        document.getElementById('lanternIcon').textContent = state.lanternNight ? '☀️' : '🕯️';
+        document.getElementById('lanternText').textContent = state.lanternNight ? '宣纸白昼' : '燃烛透光';
+        playPaperChime(3);
+        showToast(state.lanternNight ? '🕯️ 夜阑燃烛：已开启隔窗透光剧场模式' : '☀️ 晨曦映纸：已切换至宣纸浮雕白昼模式');
+      });
+
+      // 7. Audio Toggle
+      document.getElementById('chimeToggleBtn').addEventListener('click', () => {
+        state.soundOn = !state.soundOn;
+        document.getElementById('chimeIcon').textContent = state.soundOn ? '🔊' : '🔇';
+        showToast(state.soundOn ? '已开启纸韵空灵音效' : '已静音');
+      });
+
+      // 8. Jump to Portals
+      document.getElementById('jumpPortalsBtn').addEventListener('click', () => {
+        document.getElementById('stage-portals').scrollIntoView({ behavior: 'smooth' });
+      });
+
+      // 9. Clicking any Architectural Window Portal opens the Portal Entry Modal
+      const portalModal = document.getElementById('portalPreviewModal');
+      document.getElementById('portalsStaggeredContainer').addEventListener('click', (e) => {
+        const row = e.target.closest('.portal-entry-row');
+        if (!row) return;
+        const pid = row.getAttribute('data-portal-id');
+        const portal = state.portals.find((item) => item.id === pid);
+        if (!portal) return;
+
+        playPaperChime(5);
+        document.getElementById('modalWindowShapeBadge').textContent = portal.windowLabel;
+        document.getElementById('modalStatusBadge').textContent = portal.status;
+        document.getElementById('modalTitle').textContent = portal.title;
+        document.getElementById('modalSubtitle').textContent = portal.subtitle;
+        document.getElementById('modalDesc').textContent = portal.poeticDesc;
+        document.getElementById('modalRoutePath').textContent = portal.route;
+        portalModal.classList.remove('hidden');
+      });
+
+      document.getElementById('closePortalModalBtn').addEventListener('click', () => portalModal.classList.add('hidden'));
+      document.getElementById('modalCloseSecondaryBtn').addEventListener('click', () => portalModal.classList.add('hidden'));
+
+      // 10. Add Future Module Window Modal
+      const addModModal = document.getElementById('addModuleModal');
+      document.getElementById('openAddModuleModalBtn').addEventListener('click', () => {
+        addModModal.classList.remove('hidden');
+      });
+      document.getElementById('closeAddModuleBtn').addEventListener('click', () => addModModal.classList.add('hidden'));
+      document.getElementById('cancelAddModuleBtn').addEventListener('click', () => addModModal.classList.add('hidden'));
+
+      const cnNumbers = ['壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖', '拾'];
+      const shapeLabels = {
+        begonia: '海棠花窗',
+        octagon: '八角景窗',
+        moon: '满月圆窗',
+        leaf: '蕉叶轩窗'
+      };
+
+      document.getElementById('confirmAddModuleBtn').addEventListener('click', () => {
+        const title = (document.getElementById('newModTitle').value || '').trim() || '新拓剪纸轩馆';
+        const sub = (document.getElementById('newModSub').value || '').trim() || '非遗数字化创新延展空间';
+        const shape = document.getElementById('newModShape').value || 'begonia';
+        const route = (document.getElementById('newModRoute').value || '').trim() || '/new-module';
+
+        state.portals.push({
+          id: 'p-' + Date.now(),
+          number: cnNumbers[state.portals.length] || '新',
+          windowType: shape,
+          windowLabel: shapeLabels[shape] || '古典花窗',
+          status: '新挂载拓展模块',
+          title,
+          subtitle: sub,
+          poeticDesc: '此轩窗由长卷动态开辟，可直接绑定你们后续新增的功能组件与路由页面。',
+          route,
+          motif: state.portals.length % 2 === 0 ? 'mandala' : 'flora'
+        });
+
+        renderStaggeredPortals();
+        addModModal.classList.add('hidden');
+        playPaperChime(2);
+        showToast(`✨ 已在长卷末尾开辟「${shapeLabels[shape]} · ${title}」入口！`);
+      });
+    });
+  </script>
+</body>
+</html>
