@@ -212,6 +212,1216 @@
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: var(--bg-base); }
     ::-webkit-scrollbar-thumb { background: var(--c1); border-radius: 9999px; }
+
+    /* ==================== UNIFIED MODULE STYLES (WORKSHOP / PATTERNS / COLLECTION) ==================== */
+    .icon-library {
+      position: absolute;
+      width: 0;
+      height: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .nav-link {
+      position: relative;
+      padding: 0.38rem 0.9rem;
+      border-radius: 9999px;
+      font-family: 'Noto Serif SC', "Songti SC", STSong, serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--ink-text);
+      transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      cursor: pointer;
+    }
+    .nav-link:hover {
+      background: rgba(184, 34, 30, 0.10);
+      color: var(--c1);
+    }
+    .nav-link.active {
+      background: linear-gradient(135deg, var(--c1), var(--c4));
+      color: #FFFDF8;
+      box-shadow: 0 4px 14px rgba(142, 24, 21, 0.28);
+    }
+    body.lantern-night .nav-link:hover {
+      background: rgba(220, 167, 74, 0.16);
+      color: var(--c3);
+    }
+    .nav-link span#collection-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 1.15rem;
+      height: 1.15rem;
+      padding: 0 0.32rem;
+      border-radius: 9999px;
+      font-size: 0.68rem;
+      background: rgba(220, 167, 74, 0.28);
+      color: inherit;
+      font-family: 'Inter', sans-serif;
+    }
+    .nav-link.active span#collection-count {
+      background: rgba(255, 253, 248, 0.24);
+      color: #FFFDF8;
+    }
+
+    /* Page Intro Banner */
+    .page-intro {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 1.5rem;
+      padding: 1.75rem 2.2rem;
+      margin-bottom: 1.75rem;
+      border-radius: 1.5rem;
+      background: rgba(255, 252, 245, 0.78);
+      border: 1px solid rgba(184, 34, 30, 0.18);
+      box-shadow: 0 16px 40px -14px rgba(55, 15, 12, 0.12);
+      backdrop-filter: blur(12px);
+    }
+    body.lantern-night .page-intro {
+      background: rgba(28, 15, 14, 0.82);
+      border-color: rgba(220, 167, 74, 0.25);
+      box-shadow: 0 16px 40px -14px rgba(0, 0, 0, 0.65);
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Noto Serif SC', serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      color: var(--c1);
+      text-transform: uppercase;
+      margin-bottom: 0.35rem;
+    }
+    body.lantern-night .eyebrow {
+      color: var(--c3);
+    }
+    .eyebrow span {
+      display: inline-block;
+      width: 1.5rem;
+      height: 2px;
+      background: linear-gradient(90deg, var(--c1), var(--c3));
+      border-radius: 2px;
+    }
+    #page-title {
+      font-family: 'Noto Serif SC', serif;
+      font-size: clamp(1.75rem, 3vw, 2.45rem);
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      line-height: 1.25;
+      margin: 0.15rem 0 0.4rem;
+    }
+    #page-title em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--c1), var(--c2), var(--c3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    #page-description {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 0.88rem;
+      opacity: 0.8;
+      max-width: 38rem;
+      line-height: 1.65;
+    }
+    .intro-note {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.25rem;
+      font-family: 'Noto Serif SC', serif;
+      font-size: 0.8rem;
+      padding-left: 1.25rem;
+      border-left: 2px solid rgba(184, 34, 30, 0.25);
+    }
+    .intro-note span {
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--c1);
+    }
+    body.lantern-night .intro-note span {
+      color: var(--c3);
+    }
+    .intro-note i {
+      font-style: normal;
+      font-size: 0.74rem;
+      opacity: 0.68;
+      letter-spacing: 0.1em;
+    }
+
+    /* 3-Column Workbench Layout */
+    .workbench {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr) 300px;
+      gap: 1.35rem;
+      align-items: stretch;
+      margin-bottom: 2.25rem;
+    }
+    @media (max-width: 1120px) {
+      .workbench {
+        grid-template-columns: 260px minmax(0, 1fr);
+      }
+      .preview-panel {
+        grid-column: 1 / -1;
+      }
+    }
+    @media (max-width: 780px) {
+      .workbench {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .tool-panel,
+    .canvas-panel,
+    .preview-panel {
+      border-radius: 1.5rem;
+      background: rgba(255, 252, 245, 0.86);
+      border: 1.5px solid rgba(184, 34, 30, 0.18);
+      box-shadow: 0 18px 42px -15px rgba(55, 15, 12, 0.14);
+      backdrop-filter: blur(14px);
+      padding: 1.35rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+    body.lantern-night .tool-panel,
+    body.lantern-night .canvas-panel,
+    body.lantern-night .preview-panel {
+      background: rgba(26, 14, 13, 0.88);
+      border-color: rgba(220, 167, 74, 0.26);
+      box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.72);
+    }
+
+    .panel-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 0.65rem;
+      border-bottom: 1px dashed rgba(184, 34, 30, 0.22);
+      font-family: 'Noto Serif SC', serif;
+      font-weight: 800;
+      font-size: 0.98rem;
+      letter-spacing: 0.12em;
+    }
+    .panel-heading small {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.66rem;
+      letter-spacing: 0.18em;
+      opacity: 0.55;
+      font-weight: 600;
+    }
+
+    .tool-section {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+    .tool-section > label {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-family: 'Noto Serif SC', serif;
+      font-size: 0.86rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+    }
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.45rem;
+      height: 1.45rem;
+      border-radius: 0.35rem;
+      background: linear-gradient(135deg, var(--c1), var(--c4));
+      color: #FFFDF8;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+    }
+
+    .fold-options {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.45rem;
+    }
+    .shape-options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.45rem;
+    }
+    .fold-options button,
+    .shape-options button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      padding: 0.55rem 0.5rem;
+      border-radius: 0.85rem;
+      border: 1.5px solid rgba(184, 34, 30, 0.2);
+      background: rgba(250, 244, 232, 0.75);
+      font-family: 'Noto Serif SC', serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--ink-text);
+      cursor: pointer;
+      transition: all 0.22s ease;
+    }
+    body.lantern-night .fold-options button,
+    body.lantern-night .shape-options button {
+      background: rgba(42, 21, 19, 0.78);
+      border-color: rgba(220, 167, 74, 0.25);
+    }
+    .fold-options button:hover,
+    .shape-options button:hover {
+      border-color: var(--c1);
+      transform: translateY(-1px);
+    }
+    .fold-options button.selected,
+    .shape-options button.selected {
+      background: linear-gradient(135deg, var(--c1), var(--c4));
+      color: #FFFDF8;
+      border-color: var(--c3);
+      box-shadow: 0 6px 14px rgba(184, 34, 30, 0.26);
+    }
+    .shape-options button svg {
+      width: 1rem;
+      height: 1rem;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+    }
+
+    .field-note {
+      font-size: 0.74rem;
+      opacity: 0.72;
+      font-family: 'Noto Serif SC', serif;
+      margin: 0;
+    }
+
+    .size-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      font-family: 'Noto Serif SC', serif;
+      margin-top: 0.2rem;
+    }
+    .size-label output {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      color: var(--c1);
+    }
+    body.lantern-night .size-label output {
+      color: var(--c3);
+    }
+
+    #cut-size {
+      width: 100%;
+      accent-color: var(--c1);
+      cursor: pointer;
+      height: 0.4rem;
+      border-radius: 999px;
+    }
+
+    .color-options {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.25rem 0;
+    }
+    .color-swatch {
+      width: 2.1rem;
+      height: 2.1rem;
+      border-radius: 9999px;
+      background: var(--swatch);
+      border: 2.5px solid #FFFDF8;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.22);
+      cursor: pointer;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+    .color-swatch:hover {
+      transform: scale(1.14);
+    }
+    .color-swatch.selected {
+      transform: scale(1.18);
+      box-shadow: 0 0 0 2.5px var(--c3), 0 6px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .tool-bottom {
+      margin-top: auto;
+      padding: 0.85rem 1rem;
+      border-radius: 1rem;
+      background: linear-gradient(135deg, rgba(184, 34, 30, 0.08), rgba(220, 167, 74, 0.12));
+      border: 1px solid rgba(220, 167, 74, 0.28);
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-family: 'Noto Serif SC', serif;
+      font-size: 0.76rem;
+      line-height: 1.5;
+    }
+    .tool-bottom svg {
+      width: 1.65rem;
+      height: 1.65rem;
+      fill: none;
+      stroke: var(--c1);
+      stroke-width: 1.75;
+      flex-shrink: 0;
+    }
+    body.lantern-night .tool-bottom svg {
+      stroke: var(--c3);
+    }
+
+    /* Center Interactive Canvas Panel */
+    .canvas-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(184, 34, 30, 0.14);
+      font-family: 'Noto Serif SC', serif;
+      font-size: 0.85rem;
+    }
+    .canvas-toolbar > div:first-child {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 700;
+    }
+    .live-dot {
+      width: 0.55rem;
+      height: 0.55rem;
+      border-radius: 9999px;
+      background: var(--c1);
+      box-shadow: 0 0 0 4px rgba(184, 34, 30, 0.18);
+    }
+    .canvas-toolbar .divider {
+      width: 1px;
+      height: 0.9rem;
+      background: rgba(184, 34, 30, 0.25);
+    }
+    .canvas-toolbar small {
+      font-weight: 500;
+      opacity: 0.75;
+      font-size: 0.78rem;
+    }
+    .history-buttons {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .icon-button {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 9999px;
+      border: 1px solid rgba(184, 34, 30, 0.22);
+      background: rgba(250, 244, 232, 0.8);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--ink-text);
+      transition: all 0.2s ease;
+    }
+    body.lantern-night .icon-button {
+      background: rgba(45, 22, 20, 0.85);
+      border-color: rgba(220, 167, 74, 0.28);
+    }
+    .icon-button:hover:not(:disabled) {
+      background: var(--c1);
+      color: #FFFDF8;
+    }
+    .icon-button:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+    .icon-button svg {
+      width: 1rem;
+      height: 1rem;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .icon-button.redo svg {
+      transform: scaleX(-1);
+    }
+
+    .paper-stage {
+      position: relative;
+      flex: 1;
+      min-height: 360px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 1.25rem;
+      background:
+        radial-gradient(circle at 50% 50%, #FFFDF9 0%, #FBF0D9 62%, #EBD4B0 100%);
+      border: 2px solid rgba(220, 167, 74, 0.42);
+      box-shadow: inset 0 0 42px rgba(184, 34, 30, 0.12);
+      padding: 1.25rem;
+      overflow: hidden;
+      user-select: none;
+    }
+    body.lantern-night .paper-stage {
+      background:
+        radial-gradient(circle at 50% 50%, #2D1513 0%, #1C0C0B 68%, #120707 100%);
+      border-color: rgba(220, 167, 74, 0.38);
+      box-shadow: inset 0 0 48px rgba(255, 205, 110, 0.16);
+    }
+
+    #editor {
+      width: 100%;
+      max-width: 420px;
+      height: auto;
+      aspect-ratio: 1 / 1;
+      cursor: crosshair;
+      filter: drop-shadow(0 16px 28px rgba(45, 10, 8, 0.28));
+      touch-action: none;
+    }
+
+    .stage-caption {
+      position: absolute;
+      top: 0.75rem;
+      left: 1rem;
+      font-family: 'Noto Serif SC', serif;
+      font-size: 0.74rem;
+      letter-spacing: 0.16em;
+      opacity: 0.62;
+      pointer-events: none;
+    }
+    .stage-stamp {
+      position: absolute;
+      bottom: 0.9rem;
+      right: 0.9rem;
+      padding: 0.3rem 0.28rem;
+      border-radius: 0.25rem;
+      border: 1.5px solid var(--c1);
+      color: var(--c1);
+      font-family: 'Noto Serif SC', serif;
+      font-size: 0.65rem;
+      font-weight: 800;
+      line-height: 1.15;
+      text-align: center;
+      opacity: 0.75;
+      pointer-events: none;
+    }
+    body.lantern-night .stage-stamp {
+      border-color: var(--c3);
+      color: var(--c3);
+    }
+    .stage-scale {
+      position: absolute;
+      bottom: 0.65rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Noto Serif SC', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      opacity: 0.55;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    .stage-scale span {
+      display: inline-block;
+      width: 1.8rem;
+      height: 1px;
+      background: currentColor;
+    }
+
+    .canvas-footer {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.6rem;
+      font-size: 0.78rem;
+      font-family: 'Noto Serif SC', serif;
+    }
+    .toggle-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .toggle-label input {
+      accent-color: var(--c1);
+      width: 0.95rem;
+      height: 0.95rem;
+      cursor: pointer;
+    }
+
+    /* Preview Panel */
+    .preview-art {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      max-width: 240px;
+      margin: 0 auto;
+      border-radius: 9999px;
+      padding: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 3px solid rgba(220, 167, 74, 0.42);
+      background:
+        radial-gradient(circle at 50% 45%, #FFFDF9 0%, #FBF0D9 58%, #EED6B3 100%);
+      box-shadow:
+        inset 0 0 32px rgba(184, 34, 30, 0.14),
+        0 14px 32px -10px rgba(55, 15, 12, 0.25);
+      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    body.lantern-night .preview-art {
+      background:
+        radial-gradient(circle at 50% 45%, #FFF5CC 0%, #F2B857 52%, #7A1C14 100%);
+      box-shadow:
+        inset 0 0 36px rgba(255, 225, 138, 0.55),
+        0 0 38px rgba(242, 184, 87, 0.26);
+    }
+    .preview-art:hover {
+      transform: scale(1.03) rotate(3deg);
+    }
+    .preview-art svg {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 8px 16px rgba(45, 10, 8, 0.26));
+    }
+
+    .preview-title {
+      text-align: center;
+    }
+    .preview-title h2 {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      margin: 0;
+    }
+    .preview-title p {
+      font-size: 0.76rem;
+      opacity: 0.7;
+      margin: 0.2rem 0 0;
+      font-family: 'Noto Serif SC', serif;
+    }
+
+    .structure-card {
+      padding: 0.75rem 0.9rem;
+      border-radius: 1rem;
+      background: rgba(184, 34, 30, 0.06);
+      border: 1px solid rgba(184, 34, 30, 0.18);
+      font-size: 0.76rem;
+      line-height: 1.5;
+    }
+    body.lantern-night .structure-card {
+      background: rgba(220, 167, 74, 0.08);
+      border-color: rgba(220, 167, 74, 0.24);
+    }
+    .structure-card > div {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: 'Noto Serif SC', serif;
+      margin-bottom: 0.2rem;
+      color: var(--c1);
+    }
+    body.lantern-night .structure-card > div {
+      color: var(--c3);
+    }
+    .structure-card svg {
+      width: 0.95rem;
+      height: 0.95rem;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.2;
+    }
+    .structure-card p {
+      margin: 0;
+      opacity: 0.82;
+    }
+    .structure-footnote,
+    .local-note {
+      font-size: 0.68rem;
+      opacity: 0.6;
+      text-align: center;
+      margin: 0;
+    }
+
+    /* Buttons */
+    .primary-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      padding: 0.68rem 1.25rem;
+      border-radius: 9999px;
+      background: linear-gradient(135deg, var(--c1), var(--c4));
+      color: #FFFDF8;
+      font-family: 'Noto Serif SC', serif;
+      font-size: 0.84rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      border: 1px solid rgba(220, 167, 74, 0.45);
+      box-shadow: 0 8px 20px -6px rgba(184, 34, 30, 0.4);
+      cursor: pointer;
+      transition: all 0.22s ease;
+    }
+    .primary-button:hover {
+      transform: translateY(-1px) scale(1.01);
+      filter: brightness(1.08);
+    }
+    .primary-button svg,
+    .secondary-actions button svg,
+    .outline-button svg,
+    .text-button svg,
+    .quiet-button svg {
+      width: 1rem;
+      height: 1rem;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .secondary-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+    }
+    .secondary-actions button,
+    .outline-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.38rem;
+      padding: 0.55rem 0.9rem;
+      border-radius: 9999px;
+      border: 1.5px solid rgba(184, 34, 30, 0.28);
+      background: rgba(250, 244, 232, 0.75);
+      color: var(--ink-text);
+      font-family: 'Noto Serif SC', serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    body.lantern-night .secondary-actions button,
+    body.lantern-night .outline-button {
+      background: rgba(42, 20, 18, 0.8);
+      border-color: rgba(220, 167, 74, 0.32);
+    }
+    .secondary-actions button:hover,
+    .outline-button:hover {
+      border-color: var(--c1);
+      background: rgba(184, 34, 30, 0.1);
+    }
+
+    .text-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.3rem;
+      padding: 0.35rem 0.65rem;
+      border-radius: 0.6rem;
+      background: transparent;
+      border: none;
+      color: var(--c1);
+      font-family: 'Noto Serif SC', serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+    }
+    body.lantern-night .text-button {
+      color: var(--c3);
+    }
+    .text-button:hover {
+      opacity: 0.8;
+      text-decoration: underline;
+    }
+
+    /* AI Section */
+    .ai-section {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 1.5rem;
+      padding: 1.75rem 2rem;
+      border-radius: 1.5rem;
+      background: linear-gradient(135deg, rgba(255, 252, 245, 0.9), rgba(240, 227, 204, 0.82));
+      border: 1.5px solid rgba(220, 167, 74, 0.38);
+      box-shadow: 0 18px 42px -15px rgba(55, 15, 12, 0.14);
+      margin-bottom: 2.25rem;
+      align-items: center;
+    }
+    body.lantern-night .ai-section {
+      background: linear-gradient(135deg, rgba(30, 16, 15, 0.92), rgba(20, 10, 10, 0.9));
+      border-color: rgba(220, 167, 74, 0.32);
+    }
+    @media (max-width: 860px) {
+      .ai-section {
+        grid-template-columns: 1fr;
+      }
+    }
+    .ai-copy h2 {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 1.45rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      margin: 0.2rem 0 0.45rem;
+    }
+    .ai-copy > p {
+      font-size: 0.84rem;
+      opacity: 0.82;
+      line-height: 1.65;
+      margin-bottom: 0.9rem;
+    }
+    .ai-copy label {
+      display: block;
+      font-family: 'Noto Serif SC', serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+    }
+    #ai-brief {
+      width: 100%;
+      padding: 0.75rem 0.95rem;
+      border-radius: 1rem;
+      border: 1.5px solid rgba(184, 34, 30, 0.24);
+      background: rgba(255, 253, 249, 0.9);
+      color: var(--ink-text);
+      font-size: 0.84rem;
+      line-height: 1.55;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+    body.lantern-night #ai-brief {
+      background: rgba(18, 9, 9, 0.85);
+      border-color: rgba(220, 167, 74, 0.3);
+    }
+    #ai-brief:focus {
+      border-color: var(--c1);
+    }
+    .ai-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.85rem;
+      margin-top: 0.75rem;
+    }
+    #ai-status {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 0.78rem;
+      color: var(--c1);
+      font-weight: 600;
+    }
+    body.lantern-night #ai-status {
+      color: var(--c3);
+    }
+    .ai-note {
+      font-size: 0.72rem;
+      opacity: 0.62;
+      margin-top: 0.6rem;
+    }
+
+    .ai-proposal {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 0.85rem;
+      padding: 1.35rem;
+      border-radius: 1.25rem;
+      background: rgba(255, 253, 248, 0.88);
+      border: 1.5px solid rgba(184, 34, 30, 0.22);
+      box-shadow: 0 12px 28px -10px rgba(45, 10, 8, 0.18);
+    }
+    body.lantern-night .ai-proposal {
+      background: rgba(36, 17, 16, 0.92);
+      border-color: rgba(220, 167, 74, 0.3);
+    }
+    .ai-art {
+      width: 165px;
+      height: 165px;
+      border-radius: 9999px;
+      padding: 0.65rem;
+      background: radial-gradient(circle, #FFFDF9 0%, #F6E4C4 100%);
+      border: 2px solid rgba(220, 167, 74, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    body.lantern-night .ai-art {
+      background: radial-gradient(circle, #FFF5CC 0%, #9E2A1B 100%);
+    }
+    .ai-art svg {
+      width: 100%;
+      height: 100%;
+    }
+    .ai-proposal-copy small {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      color: var(--c1);
+      font-weight: 700;
+    }
+    body.lantern-night .ai-proposal-copy small {
+      color: var(--c3);
+    }
+    .ai-proposal-copy h3 {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin: 0.2rem 0 0.35rem;
+    }
+    .ai-proposal-copy p {
+      font-size: 0.78rem;
+      opacity: 0.82;
+      line-height: 1.55;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Inspiration & Gallery Grids */
+    .inspiration-section,
+    .gallery-view {
+      margin-bottom: 2.5rem;
+    }
+    .section-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+    .section-top h2 {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 1.45rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      margin: 0.15rem 0 0;
+    }
+    .small-tag {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-family: 'Noto Serif SC', serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      background: rgba(184, 34, 30, 0.12);
+      color: var(--c1);
+      border: 1px solid rgba(184, 34, 30, 0.25);
+    }
+    body.lantern-night .small-tag {
+      background: rgba(220, 167, 74, 0.15);
+      color: var(--c3);
+      border-color: rgba(220, 167, 74, 0.3);
+    }
+
+    .template-grid,
+    .pattern-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(245px, 1fr));
+      gap: 1.25rem;
+    }
+    .pattern-card {
+      border-radius: 1.35rem;
+      background: rgba(255, 252, 245, 0.86);
+      border: 1.5px solid rgba(184, 34, 30, 0.16);
+      box-shadow: 0 14px 32px -12px rgba(55, 15, 12, 0.14);
+      padding: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease;
+    }
+    body.lantern-night .pattern-card {
+      background: rgba(26, 14, 13, 0.88);
+      border-color: rgba(220, 167, 74, 0.24);
+    }
+    .pattern-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--c1);
+    }
+    .pattern-card-art {
+      width: 150px;
+      height: 150px;
+      margin: 0.25rem auto;
+      border-radius: 9999px;
+      padding: 0.65rem;
+      background: radial-gradient(circle, #FFFDF9 0%, #F7E6C8 100%);
+      border: 2px solid rgba(220, 167, 74, 0.38);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.4s ease;
+    }
+    body.lantern-night .pattern-card-art {
+      background: radial-gradient(circle, #FFF4C8 0%, #8E2218 100%);
+    }
+    .pattern-card:hover .pattern-card-art {
+      transform: scale(1.06) rotate(4deg);
+    }
+    .pattern-card-art svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 3.5rem 1.5rem;
+      border-radius: 1.5rem;
+      background: rgba(255, 252, 245, 0.75);
+      border: 1.5px dashed rgba(184, 34, 30, 0.28);
+      max-width: 32rem;
+      margin: 2rem auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.65rem;
+    }
+    body.lantern-night .empty-state {
+      background: rgba(26, 14, 13, 0.78);
+      border-color: rgba(220, 167, 74, 0.32);
+    }
+    .empty-state svg {
+      width: 2.5rem;
+      height: 2.5rem;
+      stroke: var(--c1);
+      fill: none;
+      stroke-width: 1.6;
+    }
+    .empty-state h2 {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin: 0;
+    }
+    .empty-state p {
+      font-size: 0.84rem;
+      opacity: 0.75;
+      margin: 0 0 0.5rem;
+    }
+
+    /* Dialogs (Help, Result Window Lattice, Confirm) */
+    dialog {
+      border: 2px solid rgba(184, 34, 30, 0.38);
+      border-radius: 1.6rem;
+      background: var(--bg-base);
+      color: var(--ink-text);
+      padding: 1.85rem;
+      max-width: 32rem;
+      width: calc(100% - 2rem);
+      box-shadow: 0 28px 65px -12px rgba(20, 5, 4, 0.55);
+      position: fixed;
+      inset: 0;
+      margin: auto;
+      z-index: 90;
+    }
+    dialog::backdrop {
+      background: rgba(15, 6, 5, 0.72);
+      backdrop-filter: blur(6px);
+    }
+    dialog.result-dialog {
+      max-width: 48rem;
+    }
+    dialog[open] {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+    dialog.result-dialog[open] {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.6rem;
+      align-items: center;
+    }
+    @media (max-width: 720px) {
+      dialog.result-dialog[open] {
+        grid-template-columns: 1fr;
+      }
+    }
+    .dialog-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 9999px;
+      border: 1px solid rgba(184, 34, 30, 0.22);
+      background: rgba(184, 34, 30, 0.08);
+      color: var(--ink-text);
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .help-steps {
+      list-style: none;
+      padding: 0;
+      margin: 0.4rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      counter-reset: step;
+    }
+    .help-steps li {
+      position: relative;
+      padding: 0.75rem 0.9rem 0.75rem 2.8rem;
+      border-radius: 1rem;
+      background: rgba(184, 34, 30, 0.05);
+      border: 1px solid rgba(184, 34, 30, 0.14);
+    }
+    .help-steps li::before {
+      counter-increment: step;
+      content: "0" counter(step);
+      position: absolute;
+      left: 0.8rem;
+      top: 0.8rem;
+      width: 1.45rem;
+      height: 1.45rem;
+      border-radius: 0.35rem;
+      background: linear-gradient(135deg, var(--c1), var(--c4));
+      color: #FFFDF8;
+      font-size: 0.68rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .help-steps b {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 0.9rem;
+      display: block;
+      margin-bottom: 0.15rem;
+    }
+    .help-steps p {
+      font-size: 0.78rem;
+      opacity: 0.8;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* Window Lattice Showcase in Result Dialog */
+    .result-scene {
+      position: relative;
+      border-radius: 1.25rem;
+      aspect-ratio: 1 / 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      background: radial-gradient(circle at 50% 45%, #FFF7D6 0%, #F3CF8A 58%, #C88A4B 100%);
+      border: 3px solid #7C3D1C;
+      box-shadow: inset 0 0 40px rgba(184, 34, 30, 0.25);
+      overflow: hidden;
+    }
+    .window-lattice {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(90deg, rgba(110, 48, 20, 0.22) 2px, transparent 2px),
+        linear-gradient(0deg, rgba(110, 48, 20, 0.22) 2px, transparent 2px);
+      background-size: 36px 36px;
+      pointer-events: none;
+    }
+    #result-art {
+      position: relative;
+      z-index: 2;
+      width: 82%;
+      height: 82%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      filter: drop-shadow(0 12px 22px rgba(45, 10, 8, 0.38));
+    }
+    #result-art svg {
+      width: 100%;
+      height: 100%;
+    }
+    .result-scene > span {
+      position: relative;
+      z-index: 2;
+      margin-top: 0.5rem;
+      font-family: 'Noto Serif SC', serif;
+      font-size: 0.74rem;
+      letter-spacing: 0.18em;
+      color: #5A2310;
+      font-weight: 700;
+    }
+    .result-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+    .result-content h2 {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 1.45rem;
+      font-weight: 900;
+      margin: 0;
+    }
+    #work-name {
+      width: 100%;
+      padding: 0.6rem 0.85rem;
+      border-radius: 0.85rem;
+      border: 1.5px solid rgba(184, 34, 30, 0.28);
+      background: rgba(255, 253, 248, 0.9);
+      color: var(--ink-text);
+      font-family: 'Noto Serif SC', serif;
+      font-size: 0.86rem;
+    }
+    body.lantern-night #work-name {
+      background: rgba(22, 11, 10, 0.9);
+      border-color: rgba(220, 167, 74, 0.35);
+    }
+    .result-actions,
+    .confirm-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 0.35rem;
+    }
+
+    #toast {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      padding: 0.6rem 1.25rem;
+      border-radius: 9999px;
+      background: rgba(28, 14, 13, 0.94);
+      color: #FFF7E6;
+      border: 1px solid rgba(220, 167, 74, 0.45);
+      font-family: 'Noto Serif SC', serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.28s ease;
+      z-index: 100;
+    }
+    #toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
   </style>
 </head>
 <body class="theater-backdrop min-h-screen selection:bg-red-800 selection:text-amber-50">
@@ -219,44 +1429,73 @@
   <!-- ==================== FULL-VIEWPORT 2.5D 8-SPECIES PAPER-CUT ECOSYSTEM CANVAS ==================== -->
   <canvas id="breezeParticleCanvas" class="pointer-events-none fixed inset-0 z-30 w-full h-full"></canvas>
 
-  <!-- ==================== FLOATING TOP TRANSPARENT ARTISTIC HEADER ==================== -->
-  <header class="fixed top-0 inset-x-0 z-50 pointer-events-none">
-    <div class="max-w-7xl mx-auto px-4 sm:px-8 py-4 flex items-center justify-between gap-2">
+  <!-- SVG Icon Library for Workshop, Patterns & Collection Modules -->
+  <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+    <symbol id="i-cut" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="m8 8 12 12M8 16 20 4M14 12l6-8"/></symbol>
+    <symbol id="i-flower" viewBox="0 0 24 24"><path d="M12 9C3-4-4 12 9 12c-13 9 3 16 3 3 9 13 16-3 3-3 13-9-3-16-3-3Z"/><circle cx="12" cy="12" r="2"/></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24"><path d="m9 5-6 6 6 6M3 11h11a6 6 0 0 1 6 6"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M12 5v16M3 3l9 2 9-2v16l-9 2-9-2Z"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4 10-10"/></symbol>
+    <symbol id="i-save" viewBox="0 0 24 24"><path d="M5 3h14v18l-7-5-7 5Z"/></symbol>
+    <symbol id="i-reset" viewBox="0 0 24 24"><path d="M4 10a8 8 0 1 1 1 8M4 3v7h7"/></symbol>
+    <symbol id="i-expand" viewBox="0 0 24 24"><path d="m12 3 9 9-9 9-9-9ZM12 3v18M3 12h18"/></symbol>
+  </defs></svg>
+
+  <!-- ==================== FLOATING TOP UNIFIED ARTISTIC HEADER ==================== -->
+  <header class="site-header fixed top-0 inset-x-0 z-50 pointer-events-none">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-2">
       <!-- Brand Identity -->
-      <a href="#stage-top" id="brandTopLink" class="pointer-events-auto flex items-center gap-3 group backdrop-blur-md bg-[#FAF4E8]/85 dark:bg-stone-950/75 px-4 py-2 rounded-full border border-amber-900/15 shadow-md">
-        <span class="cinnabar-seal w-7 h-7 rounded-sm flex items-center justify-center font-serif-cn text-xs font-bold">生花</span>
-        <div>
-          <span class="font-serif-cn text-lg font-bold tracking-widest">纸上生花</span>
-          <span class="hidden sm:inline-block text-[11px] opacity-70 ml-2 border-l border-current pl-2 font-serif-cn">非遗剪纸数字艺术空间</span>
-        </div>
+      <a href="#stage-top" id="brandTopLink" class="brand pointer-events-auto flex items-center gap-2.5 group backdrop-blur-md bg-[#FAF4E8]/90 dark:bg-stone-950/80 px-3.5 py-1.5 rounded-full border border-amber-900/15 shadow-md" aria-label="纸上生花首页">
+        <span class="brand-seal cinnabar-seal w-7 h-7 rounded-sm flex items-center justify-center font-serif-cn text-xs font-bold">纸</span>
+        <span class="brand-name font-serif-cn text-base sm:text-lg font-bold tracking-widest flex items-center gap-2">
+          纸上生花
+          <small class="hidden xl:inline-block text-[10px] opacity-65 font-sans tracking-widest border-l border-current pl-2">PAPER BLOOMS</small>
+        </span>
       </a>
 
+      <!-- Unified Module Navigation (Home Scroll + 3 Core Modules) -->
+      <nav aria-label="主导航" class="pointer-events-auto flex items-center gap-1 backdrop-blur-md bg-[#FAF4E8]/90 dark:bg-stone-950/85 px-2 py-1 rounded-full border border-amber-900/15 shadow-md">
+        <button type="button" class="nav-link active" data-view="home">首页长卷</button>
+        <button type="button" class="nav-link" data-view="workshop">剪纸工坊</button>
+        <button type="button" class="nav-link" data-view="patterns">纹样灵感</button>
+        <button type="button" class="nav-link" data-view="collection">我的作品<span id="collection-count">0</span></button>
+      </nav>
+
       <!-- Harmonious Tonal Dye Switcher + Controls -->
-      <div class="pointer-events-auto flex items-center gap-2 backdrop-blur-md bg-[#FAF4E8]/85 dark:bg-stone-950/80 px-3 py-1.5 rounded-full border border-amber-900/15 shadow-md">
+      <div class="pointer-events-auto flex items-center gap-1.5 sm:gap-2 backdrop-blur-md bg-[#FAF4E8]/90 dark:bg-stone-950/85 px-3 py-1.5 rounded-full border border-amber-900/15 shadow-md">
         <!-- 4 Harmonious Tonal Paper-Dye Themes -->
         <div class="flex items-center gap-1.5 pr-2 border-r border-amber-900/15">
-          <button type="button" data-palette="0" title="丹霞流金" class="palette-btn w-5 h-5 rounded-full ring-2 ring-offset-1 ring-red-700 transition-transform hover:scale-125" style="background: linear-gradient(135deg, #8E1815, #C82423, #E67E5A, #DCA74A);" aria-label="丹霞流金"></button>
-          <button type="button" data-palette="1" title="胭脂春晓" class="palette-btn w-5 h-5 rounded-full opacity-80 hover:opacity-100 transition-transform hover:scale-125" style="background: linear-gradient(135deg, #7A1C34, #B82D4F, #E26D85, #E8B468);" aria-label="胭脂春晓"></button>
-          <button type="button" data-palette="2" title="天青烟雨" class="palette-btn w-5 h-5 rounded-full opacity-80 hover:opacity-100 transition-transform hover:scale-125" style="background: linear-gradient(135deg, #163847, #255C6E, #4B8B96, #D8AE60);" aria-label="天青烟雨"></button>
-          <button type="button" data-palette="3" title="琥珀泥金" class="palette-btn w-5 h-5 rounded-full opacity-80 hover:opacity-100 transition-transform hover:scale-125" style="background: linear-gradient(135deg, #6E2614, #B0441E, #D97A2B, #F0C265);" aria-label="琥珀泥金"></button>
+          <button type="button" data-palette="0" title="丹霞流金" class="palette-btn w-4 h-4 sm:w-5 sm:h-5 rounded-full ring-2 ring-offset-1 ring-red-700 transition-transform hover:scale-125" style="background: linear-gradient(135deg, #8E1815, #C82423, #E67E5A, #DCA74A);" aria-label="丹霞流金"></button>
+          <button type="button" data-palette="1" title="胭脂春晓" class="palette-btn w-4 h-4 sm:w-5 sm:h-5 rounded-full opacity-80 hover:opacity-100 transition-transform hover:scale-125" style="background: linear-gradient(135deg, #7A1C34, #B82D4F, #E26D85, #E8B468);" aria-label="胭脂春晓"></button>
+          <button type="button" data-palette="2" title="天青烟雨" class="palette-btn w-4 h-4 sm:w-5 sm:h-5 rounded-full opacity-80 hover:opacity-100 transition-transform hover:scale-125" style="background: linear-gradient(135deg, #163847, #255C6E, #4B8B96, #D8AE60);" aria-label="天青烟雨"></button>
+          <button type="button" data-palette="3" title="琥珀泥金" class="palette-btn w-4 h-4 sm:w-5 sm:h-5 rounded-full opacity-80 hover:opacity-100 transition-transform hover:scale-125" style="background: linear-gradient(135deg, #6E2614, #B0441E, #D97A2B, #F0C265);" aria-label="琥珀泥金"></button>
         </div>
 
-        <button type="button" id="lanternToggleBtn" class="px-2.5 py-1 rounded-full text-xs font-serif-cn hover:bg-red-800/10 flex items-center gap-1 transition-colors">
+        <button type="button" id="lanternToggleBtn" class="px-2 py-1 rounded-full text-xs font-serif-cn hover:bg-red-800/10 flex items-center gap-1 transition-colors" title="切换昼夜模式">
           <span id="lanternIcon">🕯️</span>
-          <span id="lanternText" class="hidden md:inline">琉璃夜窗</span>
+          <span id="lanternText" class="hidden lg:inline">琉璃夜窗</span>
         </button>
 
-        <button type="button" id="chimeToggleBtn" class="px-2 py-1 rounded-full text-xs hover:bg-red-800/10 flex items-center gap-1 transition-colors" title="古琴五声泛音">
+        <button type="button" id="chimeToggleBtn" class="px-1.5 py-1 rounded-full text-xs hover:bg-red-800/10 flex items-center gap-1 transition-colors" title="古琴五声泛音">
           <span id="chimeIcon">🔊</span>
         </button>
 
-        <button type="button" id="jumpPortalsBtn" class="px-3.5 py-1 rounded-full text-xs font-serif-cn font-semibold text-amber-50 hover:opacity-90 transition-opacity shadow-sm" style="background: linear-gradient(135deg, var(--c1), var(--c4));">
+        <button type="button" class="quiet-button help-button px-2.5 py-1 rounded-full text-xs font-serif-cn hover:bg-red-800/10 flex items-center gap-1 transition-colors border border-amber-900/15" id="help">
+          <svg class="w-3.5 h-3.5"><use href="#i-book"/></svg>
+          <span class="hidden sm:inline">初次来访？</span>
+        </button>
+
+        <button type="button" id="jumpPortalsBtn" class="hidden sm:inline-flex px-3 py-1 rounded-full text-xs font-serif-cn font-semibold text-amber-50 hover:opacity-90 transition-opacity shadow-sm" style="background: linear-gradient(135deg, var(--c1), var(--c4));">
           游园寻窗 ↓
         </button>
       </div>
     </div>
   </header>
 
+  <!-- ==================== VIEW 0: HOMEPAGE 2.5D LIVING DIORAMA & GARDEN WINDOW PORTALS ==================== -->
+  <div id="home-view">
   <!-- ==================== ACT I: 2.5D LIVING TWIN-KOI & BLOOMING LOTUS DIORAMA STAGE ==================== -->
   <section id="stage-top" class="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden pt-20 pb-12">
 
@@ -494,9 +1733,9 @@
 
       <div class="mt-6 flex flex-wrap items-center justify-end gap-3">
         <button type="button" id="modalCloseSecondaryBtn" class="px-4 py-2 rounded-full border border-red-900/20 text-xs font-serif-cn hover:bg-red-900/5">返回长卷</button>
-        <a id="modalOnlineLink" href="https://zhishang-shenghua-papercut.tendertapir.chatgpt.site" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-full text-amber-50 text-xs font-serif-cn font-semibold tracking-widest hover:opacity-90 shadow-md" style="background: linear-gradient(135deg, var(--c1), var(--c4));">
+        <button type="button" id="modalOnlineLink" class="px-5 py-2.5 rounded-full text-amber-50 text-xs font-serif-cn font-semibold tracking-widest hover:opacity-90 shadow-md cursor-pointer" style="background: linear-gradient(135deg, var(--c1), var(--c4));">
           步入此轩窗 →
-        </a>
+        </button>
       </div>
     </div>
   </div>
@@ -541,6 +1780,243 @@
   <div id="theaterToast" class="fixed bottom-5 right-5 z-50 hidden px-4 py-2.5 rounded-full bg-stone-900/90 text-amber-50 text-xs font-serif-cn tracking-wider shadow-xl border border-amber-400/30">
     <span id="theaterToastText"></span>
   </div>
+
+  </div>
+
+  <!-- ==================== UNIFIED THREE INTERACTIVE MODULES (WORKSHOP / PATTERNS / COLLECTION) ==================== -->
+  <main id="modules-shell" class="hidden relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16">
+    <section class="page-intro">
+      <div>
+        <p class="eyebrow"><span></span> 一纸一剪 · 万象新生</p>
+        <h1 id="page-title">把心意，<em>剪成花。</em></h1>
+        <p id="page-description">从一张红纸开始，在折叠与展开之间，遇见自己的第一幅窗花。</p>
+      </div>
+      <div class="flex flex-col items-end gap-3">
+        <div class="intro-note">
+          <span>一折，是巧思</span>
+          <span>一剪，是心意</span>
+          <i>手作的温度，在此延续</i>
+        </div>
+        <button type="button" data-view="home" class="text-button text-xs">← 返回非遗艺术长卷首页</button>
+      </div>
+    </section>
+
+    <!-- MODULE 1: 剪纸工坊 (WORKSHOP VIEW) -->
+    <div id="workshop-view">
+      <section class="workbench" aria-label="剪纸创作台">
+        <!-- Left Tool Panel -->
+        <aside class="tool-panel">
+          <div class="panel-heading"><span>创作工具</span><small>TOOLBOX</small></div>
+
+          <div class="tool-section">
+            <label><span class="step-number">01</span>选择折法</label>
+            <div class="fold-options" id="folds" role="group" aria-label="对称份数">
+              <button type="button" data-fold="4"><span>◈</span>四瓣</button>
+              <button type="button" data-fold="6"><span>✻</span>六瓣</button>
+              <button type="button" data-fold="8" class="selected"><span>✳</span>八瓣</button>
+            </div>
+            <p class="field-note">剪下一处，对称生成整幅图案</p>
+          </div>
+
+          <div class="tool-section">
+            <label><span class="step-number">02</span>挑一把「剪刀」</label>
+            <div class="shape-options" role="group" aria-label="剪切形状">
+              <button type="button" data-tool="leaf" class="selected"><span>♧</span>柳叶剪</button>
+              <button type="button" data-tool="circle"><span>○</span>圆孔剪</button>
+              <button type="button" data-tool="triangle"><span>△</span>月牙角</button>
+              <button type="button" data-tool="free"><svg><use href="#i-cut"/></svg>自由剪</button>
+            </div>
+            <p class="field-note" id="tool-note">在纸面点击，剪出一枚对称柳叶</p>
+            <div class="size-label">
+              <label for="cut-size">剪口大小</label>
+              <output id="size-value">28</output>
+            </div>
+            <input type="range" id="cut-size" min="10" max="65" value="28" aria-label="剪口大小">
+            <button type="button" class="primary-button text-xs py-1.5 mt-1 hidden" id="finish-cut">完成路径并裁剪 ↵</button>
+          </div>
+
+          <div class="tool-section">
+            <label><span class="step-number">03</span>选一抹纸色</label>
+            <div class="color-options" role="group" aria-label="纸张颜色">
+              <button type="button" class="color-swatch selected" data-color="#b5382d" data-color-name="朱砂红" style="--swatch:#b5382d" aria-label="朱砂红" title="朱砂红"></button>
+              <button type="button" class="color-swatch" data-color="#94413c" data-color-name="胭脂红" style="--swatch:#94413c" aria-label="胭脂红" title="胭脂红"></button>
+              <button type="button" class="color-swatch" data-color="#ad7f35" data-color-name="秋香金" style="--swatch:#ad7f35" aria-label="秋香金" title="秋香金"></button>
+              <button type="button" class="color-swatch" data-color="#426d68" data-color-name="松石绿" style="--swatch:#426d68" aria-label="松石绿" title="松石绿"></button>
+            </div>
+          </div>
+
+          <div class="tool-bottom">
+            <svg><use href="#i-flower"/></svg>
+            <p>不必剪得完美<br><strong>每一剪，都有你的模样。</strong></p>
+          </div>
+        </aside>
+
+        <!-- Center Interactive Canvas Panel -->
+        <section class="canvas-panel">
+          <div class="canvas-toolbar">
+            <div>
+              <span class="live-dot"></span>
+              <span id="canvas-mode-label">对称剪纸</span>
+              <span class="divider"></span>
+              <small id="cut-count">0 次裁剪</small>
+            </div>
+            <div class="history-buttons">
+              <button type="button" id="undo" class="icon-button" title="撤销 Ctrl+Z" aria-label="撤销" disabled><svg><use href="#i-back"/></svg></button>
+              <button type="button" id="redo" class="icon-button redo" title="重做 Ctrl+Shift+Z" aria-label="重做" disabled><svg><use href="#i-back"/></svg></button>
+              <button type="button" id="reset" class="icon-button" title="换一张空白纸" aria-label="换一张空白纸"><svg><use href="#i-reset"/></svg></button>
+            </div>
+          </div>
+
+          <div class="paper-stage" id="paper-stage">
+            <div class="stage-caption">落剪有形，展开有惊喜</div>
+            <svg id="editor" viewBox="0 0 600 600" role="img" aria-label="交互剪纸画布，点击纸面裁剪；键盘用户可使用下方在选区试剪按钮"></svg>
+            <div class="stage-stamp">亲<br>手<br>作</div>
+            <div class="stage-scale"><span></span>一张纸的无限可能<span></span></div>
+          </div>
+
+          <div class="canvas-footer">
+            <label class="toggle-label"><input id="show-guides" type="checkbox" checked><span class="toggle"></span>折线辅助</label>
+            <button type="button" id="keyboard-cut" class="text-button">✂ 在选区试剪一刀</button>
+            <span id="canvas-hint" class="opacity-65 text-xs">点击红纸任意位置即可对称试剪 · Ctrl + Z 撤销</span>
+          </div>
+        </section>
+
+        <!-- Right Unfolded Preview Panel -->
+        <aside class="preview-panel">
+          <div class="panel-heading"><span>展开之后</span><small>PREVIEW</small></div>
+          <div class="preview-art" id="preview-art"></div>
+          <div class="preview-title">
+            <h2 id="art-title">团花 · 初见</h2>
+            <p id="art-subtitle">八瓣对称 / 朱砂红</p>
+          </div>
+          <div class="structure-card" id="structure-card">
+            <div><svg><use href="#i-check"/></svg><strong id="structure-title">纸张结构完好</strong></div>
+            <p id="structure-description">落刀后将实时估算「千刀不断、万眼相连」的纸桥连接状态。</p>
+          </div>
+          <p class="structure-footnote">按屏幕图形估算连接；实际剪制还需考虑纸张纤维与尺寸。</p>
+          <button type="button" class="primary-button w-full" id="unfold"><svg><use href="#i-expand"/></svg>展开这份心意</button>
+          <div class="secondary-actions">
+            <button type="button" id="save"><svg><use href="#i-save"/></svg>收藏</button>
+            <button type="button" id="export"><svg><use href="#i-download"/></svg>导出 PNG</button>
+          </div>
+          <button type="button" class="text-button ai-record hidden" id="export-ai-record">下载 AI 创作记录 JSON</button>
+          <p class="local-note" id="save-note">作品保存在当前浏览器收藏匣</p>
+        </aside>
+      </section>
+
+      <!-- AI Creative Partner Section -->
+      <section class="ai-section" aria-labelledby="ai-heading">
+        <div class="ai-copy">
+          <span class="eyebrow"><span></span> AI CREATIVE PARTNER</span>
+          <h2 id="ai-heading">说出心意，生成剪纸草案</h2>
+          <p>写下赠送对象和祝福主题，AI 创意伙伴会组合可编辑的对称几何剪口。你可以将草案载入画布继续裁剪、检查连接并展开作品。</p>
+          <div class="flex flex-wrap items-center gap-1.5 mb-3">
+            <span class="text-xs font-serif-cn opacity-65">灵感速填：</span>
+            <button type="button" class="ai-preset-chip text-xs font-serif-cn px-2.5 py-1 rounded-full border border-amber-900/20 hover:border-red-700 transition-colors" data-prompt="给即将毕业的朋友一幅表达前程似锦、乘风破浪的八瓣窗花，大气舒展。">🎓 毕业前程似锦</button>
+            <button type="button" class="ai-preset-chip text-xs font-serif-cn px-2.5 py-1 rounded-full border border-amber-900/20 hover:border-red-700 transition-colors" data-prompt="新春佳节团圆祈福窗花，六瓣雪花与莲瓣交织，寓意岁岁平安、连年有余。">🧧 新春岁岁平安</button>
+            <button type="button" class="ai-preset-chip text-xs font-serif-cn px-2.5 py-1 rounded-full border border-amber-900/20 hover:border-red-700 transition-colors" data-prompt="送给新婚挚友的喜庆八瓣团花，繁花似锦、心心相印，镂空细腻。">💐 佳偶繁花似锦</button>
+            <button type="button" class="ai-preset-chip text-xs font-serif-cn px-2.5 py-1 rounded-full border border-amber-900/20 hover:border-red-700 transition-colors" data-prompt="为长辈祝寿的松鹤长春主题四瓣方胜窗花，沉稳古雅，福寿绵长。">🍑 长辈福寿绵长</button>
+          </div>
+          <label for="ai-brief">我的创作需求</label>
+          <textarea id="ai-brief" maxlength="200" rows="3" placeholder="例如：给即将毕业的朋友一幅表达前程顺利的八瓣窗花，简洁一些。"></textarea>
+          <div class="ai-actions">
+            <button type="button" class="primary-button" id="ai-generate">✨ 生成设计草案</button>
+            <span id="ai-status" role="status" aria-live="polite">等待你的灵感</span>
+          </div>
+          <p class="ai-note">当前生成的是原创可编辑几何剪纸草案，载入后可在上方画布自由增删每一刀。</p>
+        </div>
+
+        <div id="ai-proposal" class="ai-proposal hidden">
+          <div id="ai-art" class="ai-art"></div>
+          <div class="ai-proposal-copy">
+            <small>AI 草案 · 可继续编辑</small>
+            <h3 id="ai-title"></h3>
+            <p id="ai-explanation"></p>
+            <button type="button" class="primary-button" id="ai-apply">用这幅草案开始剪纸 →</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Inspiration Templates Strip -->
+      <section class="inspiration-section">
+        <div class="section-top">
+          <div>
+            <span class="eyebrow"><span></span> A LITTLE INSPIRATION</span>
+            <h2>灵感，从这里开始</h2>
+          </div>
+          <button type="button" class="text-button" id="see-patterns">探索全部纹样谱系 <svg><use href="#i-arrow"/></svg></button>
+        </div>
+        <div class="template-grid" id="template-grid"></div>
+      </section>
+    </div>
+
+    <!-- MODULE 2: 纹样灵感 (PATTERNS VIEW) -->
+    <section id="patterns-view" class="hidden gallery-view">
+      <div class="section-top">
+        <p class="font-serif-cn text-sm opacity-80">先从一枚经典母题或练习纹样出发，载入工坊亲手剪出属于自己的光影变化。</p>
+        <span class="small-tag">非遗母题与原创练习谱系</span>
+      </div>
+      <div class="pattern-grid" id="pattern-grid"></div>
+      <p class="gallery-note text-xs opacity-60 font-serif-cn mt-6 text-center">注：工坊练习纹样结合传统团花对称骨骼与现代数字几何生成，均可一键载入创作台二次雕琢。</p>
+    </section>
+
+    <!-- MODULE 3: 我的作品 (COLLECTION VIEW) -->
+    <section id="collection-view" class="hidden gallery-view">
+      <div id="collection-grid" class="pattern-grid"></div>
+      <div id="empty-collection" class="empty-state hidden">
+        <svg><use href="#i-save"/></svg>
+        <h2>把第一份心意留在这里</h2>
+        <p>在剪纸工坊点击「收藏」，就能保存窗花作品并随时贴窗赏析或继续创作。</p>
+        <button type="button" class="primary-button" data-view="workshop">去剪一幅窗花</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== UNIFIED DIALOGS (HELP / RESULT WINDOW LATTICE / CONFIRM / TOAST) ==================== -->
+  <dialog id="help-dialog">
+    <button type="button" class="dialog-close" data-close aria-label="关闭">×</button>
+    <span class="eyebrow"><span></span> YOUR FIRST PAPER BLOOM</span>
+    <h2 class="font-serif-cn text-xl font-black m-0">三步，剪出第一份心意</h2>
+    <ol class="help-steps">
+      <li><b>选一种对称折法</b><p>四瓣、六瓣或八瓣，决定剪口如何在红纸上对称繁衍成满窗团花。</p></li>
+      <li><b>在宣纸上落剪</b><p>选择柳叶剪、圆孔剪或月牙角，点击红纸即可对称裁剪。自由剪支持依次点击至少三个顶点描绘自定义镂空路径，按 Enter 或点击「完成路径」即可成型，按 Esc 取消。</p></li>
+      <li><b>展开，映窗留存</b><p>查看「千刀不断」连接提示，点击「展开这份心意」将窗花贴上古典木棂花窗，收藏至作品匣或导出高清 PNG / 矢量 SVG。</p></li>
+    </ol>
+    <p class="text-xs opacity-65 font-serif-cn m-0">提示：顶部导航栏可随时切换「首页长卷」、「剪纸工坊」、「纹样灵感」与「我的作品」，并支持切换四款传统浸染纸色主题与「琉璃夜窗」光影模式。</p>
+    <button type="button" class="primary-button self-end" data-close>开始我的第一剪 <svg><use href="#i-arrow"/></svg></button>
+  </dialog>
+
+  <dialog id="result-dialog" class="result-dialog">
+    <button type="button" class="dialog-close" data-close aria-label="关闭">×</button>
+    <div class="result-scene">
+      <div class="window-lattice"></div>
+      <div id="result-art"></div>
+      <span>一窗好景，一纸心意</span>
+    </div>
+    <div class="result-content">
+      <span class="eyebrow"><span></span> MADE BY YOU</span>
+      <h2>这一朵，独一无二。</h2>
+      <p class="text-xs sm:text-sm opacity-80 font-serif-cn m-0">晨昏光影穿过镂空的花窗，指尖心意便有了温润的形状。</p>
+      <label for="work-name" class="text-xs font-serif-cn font-bold mt-2">给作品题个名字</label>
+      <input id="work-name" maxlength="24" placeholder="团花 · 初见">
+      <div class="result-actions">
+        <button type="button" class="primary-button" id="result-save"><svg><use href="#i-save"/></svg>收藏作品</button>
+        <button type="button" class="outline-button" id="result-export"><svg><use href="#i-download"/></svg>导出 PNG</button>
+      </div>
+      <button type="button" class="text-button self-start mt-1" id="export-svg">下载矢量 SVG 文件 ↓</button>
+    </div>
+  </dialog>
+
+  <dialog id="confirm-dialog">
+    <h2 id="confirm-title" class="font-serif-cn text-lg font-bold m-0">换一张新纸？</h2>
+    <p id="confirm-message" class="text-xs sm:text-sm opacity-80 font-serif-cn m-0">当前画布上的剪口尚未收藏，继续操作将替换当前红纸。</p>
+    <div class="confirm-actions justify-end">
+      <button type="button" class="outline-button" id="confirm-cancel">再想想</button>
+      <button type="button" class="primary-button" id="confirm-ok">确认继续</button>
+    </div>
+  </dialog>
+
+  <div id="toast" role="status" aria-live="polite"></div>
 
   <!-- Minimal Poetic Colophon Footer -->
   <footer class="relative z-10 border-t border-amber-900/10 py-8 text-center text-xs opacity-65 font-serif-cn tracking-widest">
@@ -1864,7 +3340,1230 @@
         burstPaperButterflies();
         showToast(`✨ 已辟「${title}」`);
       });
+
+
+    // ==================== UNIFIED PAPERCUT GEOMETRY & WORKBENCH ENGINE ====================
+    const COLOR_NAMES = {
+      '#b5382d': '朱砂红',
+      '#94413c': '胭脂红',
+      '#ad7f35': '秋香金',
+      '#426d68': '松石绿'
+    };
+
+    const FOLD_NAMES = {
+      4: '四瓣对称',
+      6: '六瓣对称',
+      8: '八瓣对称'
+    };
+
+    const TOOL_NOTES = {
+      leaf: '在纸面点击，剪出一枚对称柳叶纹',
+      circle: '在纸面点击，镂刻一枚圆润珠孔',
+      triangle: '在纸面点击，裁出传统月牙锯齿角',
+      free: '依次点击纸面添加至少 3 个顶点，按 Enter 或点击按钮完成裁剪'
+    };
+
+    // Curated Traditional & Practice Papercut Templates
+    const CURATED_PATTERNS = [
+      {
+        id: 'tpl-bloom',
+        title: '团花 · 初见',
+        subtitle: '八瓣对称 · 经典入门团花',
+        tag: '入门推荐',
+        folds: 8,
+        color: '#b5382d',
+        desc: '以中心宝相莲瓣配外围圆珠与月牙角，疏密得当，展开如春花初绽。',
+        cuts: [
+          { type: 'circle', r: 42, relAngle: 0.5, size: 16 },
+          { type: 'leaf', r: 105, relAngle: 0.35, size: 34 },
+          { type: 'triangle', r: 155, relAngle: 0.72, size: 26 },
+          { type: 'leaf', r: 195, relAngle: 0.42, size: 30 },
+          { type: 'circle', r: 226, relAngle: 0.25, size: 14 }
+        ]
+      },
+      {
+        id: 'tpl-koi-lotus',
+        title: '双鱼戏莲 · 连年有余',
+        subtitle: '八瓣对称 · 吉庆水波宝莲',
+        tag: '非遗母题',
+        folds: 8,
+        color: '#b5382d',
+        desc: '汲取双鱼穿波戏莲之灵动韵律，层叠柳叶与月牙水纹交织，寓意吉庆有余。',
+        cuts: [
+          { type: 'circle', r: 36, relAngle: 0.5, size: 15 },
+          { type: 'leaf', r: 82, relAngle: 0.28, size: 30 },
+          { type: 'leaf', r: 118, relAngle: 0.68, size: 36 },
+          { type: 'triangle', r: 158, relAngle: 0.32, size: 28 },
+          { type: 'leaf', r: 196, relAngle: 0.62, size: 32 },
+          { type: 'circle', r: 228, relAngle: 0.45, size: 16 }
+        ]
+      },
+      {
+        id: 'tpl-phoenix-peony',
+        title: '凤穿牡丹 · 锦绣韶华',
+        subtitle: '八瓣对称 · 繁花羽翼团花',
+        tag: '非遗母题',
+        folds: 8,
+        color: '#94413c',
+        desc: '羽翼柳叶纹与盛放牡丹花瓣层层环绕，展现「千刀不断、万眼相连」的繁复华美。',
+        cuts: [
+          { type: 'circle', r: 34, relAngle: 0.45, size: 14 },
+          { type: 'triangle', r: 70, relAngle: 0.55, size: 22 },
+          { type: 'leaf', r: 110, relAngle: 0.30, size: 35 },
+          { type: 'leaf', r: 145, relAngle: 0.70, size: 32 },
+          { type: 'triangle', r: 182, relAngle: 0.35, size: 26 },
+          { type: 'leaf', r: 212, relAngle: 0.60, size: 28 },
+          { type: 'circle', r: 232, relAngle: 0.25, size: 13 }
+        ]
+      },
+      {
+        id: 'tpl-plum-snow',
+        title: '冰梅迎春 · 绛雪流金',
+        subtitle: '六瓣对称 · 寒梅瑞雪窗花',
+        tag: '节气雅集',
+        folds: 6,
+        color: '#ad7f35',
+        desc: '六瓣冰凌骨架结合五出寒梅珠孔，清雅通透，宛若冬日晴窗映雪。',
+        cuts: [
+          { type: 'circle', r: 45, relAngle: 0.5, size: 18 },
+          { type: 'leaf', r: 96, relAngle: 0.45, size: 34 },
+          { type: 'circle', r: 145, relAngle: 0.28, size: 20 },
+          { type: 'triangle', r: 178, relAngle: 0.65, size: 30 },
+          { type: 'leaf', r: 215, relAngle: 0.40, size: 28 }
+        ]
+      },
+      {
+        id: 'tpl-fangsheng',
+        title: '吉庆方胜 · 四季平安',
+        subtitle: '四瓣对称 · 端方几何锦纹',
+        tag: '古典器型',
+        folds: 4,
+        color: '#b5382d',
+        desc: '取江南园林四方漏窗与同心方胜之意，骨骼端庄稳健，四角流芳。',
+        cuts: [
+          { type: 'triangle', r: 52, relAngle: 0.5, size: 24 },
+          { type: 'leaf', r: 108, relAngle: 0.32, size: 38 },
+          { type: 'circle', r: 148, relAngle: 0.66, size: 22 },
+          { type: 'triangle', r: 188, relAngle: 0.42, size: 32 },
+          { type: 'leaf', r: 220, relAngle: 0.72, size: 26 }
+        ]
+      },
+      {
+        id: 'tpl-pine-crane',
+        title: '松鹤长春 · 翠羽松针',
+        subtitle: '六瓣对称 · 苍松瑞羽纹样',
+        tag: '祈福祝寿',
+        folds: 6,
+        color: '#426d68',
+        desc: '以松石绿宣纸裁出松针锯齿与鹤羽柳叶，清隽挺拔，寓意松鹤延年。',
+        cuts: [
+          { type: 'circle', r: 40, relAngle: 0.4, size: 16 },
+          { type: 'triangle', r: 86, relAngle: 0.6, size: 26 },
+          { type: 'leaf', r: 132, relAngle: 0.35, size: 36 },
+          { type: 'triangle', r: 175, relAngle: 0.68, size: 28 },
+          { type: 'leaf', r: 214, relAngle: 0.48, size: 30 }
+        ]
+      }
+    ];
+
+    const workshopState = {
+      currentView: 'home', // 'home' | 'workshop' | 'patterns' | 'collection'
+      folds: 8,
+      tool: 'leaf',
+      cutSize: 28,
+      color: '#b5382d',
+      showGuides: true,
+      title: '团花 · 初见',
+      cuts: [
+        { id: 'c1', type: 'circle', r: 44, relAngle: 0.5, size: 16 },
+        { id: 'c2', type: 'leaf', r: 112, relAngle: 0.38, size: 34 },
+        { id: 'c3', type: 'triangle', r: 168, relAngle: 0.68, size: 26 },
+        { id: 'c4', type: 'leaf', r: 206, relAngle: 0.42, size: 28 }
+      ],
+      undoStack: [],
+      redoStack: [],
+      freePoints: [], // [{r, relAngle, x, y}] when drawing a polygon
+      hoverPos: null, // {r, relAngle, x, y}
+      unsavedChanges: false,
+      lastAiRecord: null,
+      pendingProposal: null,
+      collection: []
+    };
+
+    // Load or seed collection with try/catch localStorage safety
+    function loadCollectionFromStorage() {
+      let saved = null;
+      try {
+        const raw = localStorage.getItem('zhishang_shenghua_collection_v1');
+        if (raw) saved = JSON.parse(raw);
+      } catch (e) {}
+
+      if (Array.isArray(saved) && saved.length > 0) {
+        workshopState.collection = saved;
+      } else {
+        workshopState.collection = [
+          {
+            id: 'work-seed-1',
+            title: '双鱼戏莲 · 岁岁有余',
+            folds: 8,
+            color: '#b5382d',
+            createdAt: '2026-10-15',
+            cuts: JSON.parse(JSON.stringify(CURATED_PATTERNS[1].cuts))
+          },
+          {
+            id: 'work-seed-2',
+            title: '冰梅迎春 · 绛雪流金',
+            folds: 6,
+            color: '#ad7f35',
+            createdAt: '2026-10-15',
+            cuts: JSON.parse(JSON.stringify(CURATED_PATTERNS[3].cuts))
+          }
+        ];
+      }
+      updateCollectionBadge();
+    }
+
+    function saveCollectionToStorage() {
+      try {
+        localStorage.setItem('zhishang_shenghua_collection_v1', JSON.stringify(workshopState.collection));
+      } catch (e) {}
+      updateCollectionBadge();
+    }
+
+    function updateCollectionBadge() {
+      const badge = document.getElementById('collection-count');
+      if (badge) badge.textContent = String(workshopState.collection.length);
+    }
+
+    // Show unified toast notification
+    let moduleToastTimer = null;
+    function showModuleToast(message) {
+      const toastEl = document.getElementById('toast');
+      if (toastEl) {
+        toastEl.textContent = message;
+        toastEl.classList.add('show');
+        if (moduleToastTimer) clearTimeout(moduleToastTimer);
+        moduleToastTimer = setTimeout(() => toastEl.classList.remove('show'), 2400);
+      }
+      showToast(message);
+    }
+
+    // Safe Dialog Helpers (works in any iframe/browser)
+    function openDialogSafe(dlg) {
+      if (!dlg) return;
+      try {
+        if (typeof dlg.showModal === 'function' && !dlg.open) {
+          dlg.showModal();
+        } else {
+          dlg.setAttribute('open', '');
+        }
+      } catch (e) {
+        dlg.setAttribute('open', '');
+      }
+    }
+
+    function closeDialogSafe(dlg) {
+      if (!dlg) return;
+      try {
+        if (typeof dlg.close === 'function' && dlg.open) {
+          dlg.close();
+        } else {
+          dlg.removeAttribute('open');
+        }
+      } catch (e) {
+        dlg.removeAttribute('open');
+      }
+    }
+
+    // ==================== SYMMETRIC PAPERCUT SVG PATH GENERATOR ====================
+    const STAGE_CENTER = 300;
+    const PAPER_RADIUS = 250;
+
+    // Convert (x, y) in 600x600 SVG space into canonical folded wedge coordinates (r, relAngle in [0..1])
+    function xyToCanonicalWedge(x, y, folds) {
+      const dx = x - STAGE_CENTER;
+      const dy = y - STAGE_CENTER;
+      const r = Math.min(PAPER_RADIUS - 6, Math.max(12, Math.sqrt(dx * dx + dy * dy)));
+      let angle = Math.atan2(dy, dx) + Math.PI / 2; // 0 at top (-90 deg)
+      while (angle < 0) angle += Math.PI * 2;
+      while (angle >= Math.PI * 2) angle -= Math.PI * 2;
+
+      const totalWedges = folds * 2;
+      const wedgeAngle = (Math.PI * 2) / totalWedges;
+      const wedgeIndex = Math.floor(angle / wedgeAngle);
+      let offsetInWedge = angle - wedgeIndex * wedgeAngle;
+      // Mirror odd wedges so folded symmetry is true reflection!
+      if (wedgeIndex % 2 === 1) {
+        offsetInWedge = wedgeAngle - offsetInWedge;
+      }
+      const relAngle = Math.max(0.04, Math.min(0.96, offsetInWedge / wedgeAngle));
+      return { r, relAngle };
+    }
+
+    // Convert canonical (r, relAngle) to (x, y) in wedge `w` (0 .. 2*folds - 1)
+    function wedgeCoordToXY(r, relAngle, w, folds) {
+      const totalWedges = folds * 2;
+      const wedgeAngle = (Math.PI * 2) / totalWedges;
+      const localFrac = (w % 2 === 1) ? (1 - relAngle) : relAngle;
+      const theta = -Math.PI / 2 + (w + localFrac) * wedgeAngle;
+      return {
+        x: STAGE_CENTER + r * Math.cos(theta),
+        y: STAGE_CENTER + r * Math.sin(theta),
+        theta,
+        mirror: w % 2 === 1 ? -1 : 1
+      };
+    }
+
+    // Build SVG path string for a single cut instance in wedge `w`
+    function buildCutPathInWedge(cut, w, folds) {
+      if (cut.type === 'free' && Array.isArray(cut.points) && cut.points.length >= 3) {
+        const pts = cut.points.map((pt) => wedgeCoordToXY(pt.r, pt.relAngle, w, folds));
+        return 'M ' + pts.map((p) => `${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(' L ') + ' Z';
+      }
+
+      const pos = wedgeCoordToXY(cut.r, cut.relAngle, w, folds);
+      const sz = cut.size || 28;
+      const cx = pos.x;
+      const cy = pos.y;
+      const ang = pos.theta;
+      const cosA = Math.cos(ang);
+      const sinA = Math.sin(ang);
+
+      // Local helper to transform (lx, ly) along radial axis
+      function tr(lx, ly) {
+        const rx = cx + lx * cosA - ly * sinA;
+        const ry = cy + lx * sinA + ly * cosA;
+        return `${rx.toFixed(1)} ${ry.toFixed(1)}`;
+      }
+
+      if (cut.type === 'circle') {
+        const rad = sz * 0.52;
+        return `M ${(cx - rad).toFixed(1)} ${cy.toFixed(1)} a ${rad.toFixed(1)} ${rad.toFixed(1)} 0 1 0 ${(rad * 2).toFixed(1)} 0 a ${rad.toFixed(1)} ${rad.toFixed(1)} 0 1 0 ${(-rad * 2).toFixed(1)} 0 Z`;
+      }
+
+      if (cut.type === 'triangle') {
+        // Traditional crescent/sawtooth horn notch
+        const len = sz * 0.92;
+        const wid = sz * 0.58 * pos.mirror;
+        return `M ${tr(-len * 0.65, 0)} Q ${tr(0, wid * 1.15)} ${tr(len * 0.75, wid * 0.18)} Q ${tr(len * 0.15, -wid * 0.45)} ${tr(-len * 0.65, 0)} Z`;
+      }
+
+      // Default: 'leaf' (Classic pointed willow-leaf / petal cutout)
+      const len = sz * 1.05;
+      const wid = sz * 0.48;
+      return `M ${tr(-len * 0.72, 0)} Q ${tr(0, -wid)} ${tr(len * 0.72, 0)} Q ${tr(0, wid)} ${tr(-len * 0.72, 0)} Z`;
+    }
+
+    // Build outer scalloped traditional paper silhouette path
+    function buildOuterPaperPath(cx, cy, r, folds) {
+      const lobes = folds * 4;
+      let d = '';
+      for (let i = 0; i <= 360; i++) {
+        const rad = (i * Math.PI) / 180;
+        const rr = r * (0.972 + 0.028 * Math.cos(lobes * rad));
+        const x = cx + rr * Math.cos(rad);
+        const y = cy + rr * Math.sin(rad);
+        d += (i === 0 ? 'M ' : ' L ') + `${x.toFixed(1)} ${y.toFixed(1)}`;
+      }
+      return d + ' Z';
+    }
+
+    // Generate complete standalone SVG markup for any papercut state (used for #preview-art, #result-art, #ai-art, pattern cards, and SVG/PNG export!)
+    function generatePapercutSvgMarkup(config, maskIdPrefix = 'mask-art') {
+      const folds = config.folds || 8;
+      const color = config.color || '#b5382d';
+      const cuts = config.cuts || [];
+      const totalWedges = folds * 2;
+      const outerPath = buildOuterPaperPath(STAGE_CENTER, STAGE_CENTER, PAPER_RADIUS, folds);
+
+      let allCutPaths = '';
+      cuts.forEach((cut) => {
+        for (let w = 0; w < totalWedges; w++) {
+          allCutPaths += `<path d="${buildCutPathInWedge(cut, w, folds)}" />`;
+        }
+      });
+
+      const uniqueMaskId = `${maskIdPrefix}-${Math.random().toString(36).slice(2, 8)}`;
+      return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-label="${config.title || '窗花预览'}">
+        <defs>
+          <mask id="${uniqueMaskId}">
+            <rect width="600" height="600" fill="black" />
+            <path d="${outerPath}" fill="white" />
+            <g fill="black">${allCutPaths}</g>
+          </mask>
+        </defs>
+        <g mask="url(#${uniqueMaskId})">
+          <rect width="600" height="600" fill="${color}" />
+          <circle cx="300" cy="300" r="244" fill="none" stroke="#DCA74A" stroke-width="1.5" stroke-dasharray="6 5" opacity="0.55" />
+        </g>
+      </svg>`;
+    }
+
+    // Render Interactive #editor Canvas & Live #preview-art
+    function renderWorkshopEditorAndPreview() {
+      const editorSvg = document.getElementById('editor');
+      const previewContainer = document.getElementById('preview-art');
+      if (!editorSvg || !previewContainer) return;
+
+      const folds = workshopState.folds;
+      const totalWedges = folds * 2;
+      const wedgeAngle = (Math.PI * 2) / totalWedges;
+      const outerPath = buildOuterPaperPath(STAGE_CENTER, STAGE_CENTER, PAPER_RADIUS, folds);
+
+      // 1. All committed symmetric cut paths
+      let cutPathsHtml = '';
+      workshopState.cuts.forEach((cut) => {
+        for (let w = 0; w < totalWedges; w++) {
+          cutPathsHtml += `<path d="${buildCutPathInWedge(cut, w, folds)}" />`;
+        }
+      });
+
+      // 2. Fold guide lines & active wedge highlight
+      let guidesHtml = '';
+      if (workshopState.showGuides) {
+        const a0 = -Math.PI / 2;
+        const a1 = a0 + wedgeAngle;
+        const x0 = STAGE_CENTER + PAPER_RADIUS * Math.cos(a0);
+        const y0 = STAGE_CENTER + PAPER_RADIUS * Math.sin(a0);
+        const x1 = STAGE_CENTER + PAPER_RADIUS * Math.cos(a1);
+        const y1 = STAGE_CENTER + PAPER_RADIUS * Math.sin(a1);
+        guidesHtml += `<path d="M 300 300 L ${x0.toFixed(1)} ${y0.toFixed(1)} A ${PAPER_RADIUS} ${PAPER_RADIUS} 0 0 1 ${x1.toFixed(1)} ${y1.toFixed(1)} Z" fill="rgba(255, 240, 195, 0.16)" stroke="rgba(255, 232, 160, 0.72)" stroke-width="1.6" stroke-dasharray="6 4" pointer-events="none" />`;
+
+        for (let w = 0; w < totalWedges; w++) {
+          const ang = -Math.PI / 2 + w * wedgeAngle;
+          const gx = STAGE_CENTER + PAPER_RADIUS * Math.cos(ang);
+          const gy = STAGE_CENTER + PAPER_RADIUS * Math.sin(ang);
+          guidesHtml += `<line x1="300" y1="300" x2="${gx.toFixed(1)}" y2="${gy.toFixed(1)}" stroke="rgba(255, 242, 210, 0.34)" stroke-width="1" stroke-dasharray="5 5" pointer-events="none" />`;
+        }
+        guidesHtml += `<circle cx="300" cy="300" r="6" fill="#FFF5D6" opacity="0.75" pointer-events="none" />`;
+      }
+
+      // 3. Hover ghost preview or Freehand path preview
+      let interactiveOverlayHtml = '';
+      if (workshopState.tool === 'free' && workshopState.freePoints.length > 0) {
+        const pts = workshopState.freePoints;
+        const polyStr = pts.map((p) => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ');
+        interactiveOverlayHtml += `<polyline points="${polyStr}" fill="rgba(255, 245, 210, 0.25)" stroke="#FFF5D6" stroke-width="2.2" stroke-dasharray="4 3" pointer-events="none" />`;
+        pts.forEach((p, idx) => {
+          interactiveOverlayHtml += `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="${idx === 0 ? 6 : 4.5}" fill="${idx === 0 ? '#DCA74A' : '#FFFDF8'}" stroke="#8E1815" stroke-width="1.5" pointer-events="none" />`;
+        });
+      } else if (workshopState.hoverPos && workshopState.tool !== 'free') {
+        const ghostCut = {
+          type: workshopState.tool,
+          r: workshopState.hoverPos.r,
+          relAngle: workshopState.hoverPos.relAngle,
+          size: workshopState.cutSize
+        };
+        for (let w = 0; w < totalWedges; w++) {
+          interactiveOverlayHtml += `<path d="${buildCutPathInWedge(ghostCut, w, folds)}" fill="rgba(255, 250, 235, 0.38)" stroke="#FFF5D6" stroke-width="1.4" stroke-dasharray="3 2" pointer-events="none" />`;
+        }
+      }
+
+      editorSvg.innerHTML = `
+        <defs>
+          <mask id="editor-paper-mask">
+            <rect width="600" height="600" fill="black" />
+            <path d="${outerPath}" fill="white" />
+            <g fill="black">${cutPathsHtml}</g>
+          </mask>
+        </defs>
+        <g mask="url(#editor-paper-mask)">
+          <rect width="600" height="600" fill="${workshopState.color}" />
+          <circle cx="300" cy="300" r="242" fill="none" stroke="rgba(255, 230, 175, 0.45)" stroke-width="1.5" />
+        </g>
+        ${guidesHtml}
+        ${interactiveOverlayHtml}
+      `;
+
+      // Update Live Preview Art
+      previewContainer.innerHTML = generatePapercutSvgMarkup(workshopState, 'preview-mask');
+
+      // Update Labels & Counts
+      document.getElementById('cut-count').textContent = `${workshopState.cuts.length} 次裁剪`;
+      document.getElementById('art-title').textContent = workshopState.title;
+      const cName = COLOR_NAMES[workshopState.color] || '朱砂红';
+      document.getElementById('art-subtitle').textContent = `${FOLD_NAMES[folds] || '八瓣对称'} / ${cName}`;
+
+      document.getElementById('undo').disabled = workshopState.undoStack.length === 0;
+      document.getElementById('redo').disabled = workshopState.redoStack.length === 0;
+
+      const finishBtn = document.getElementById('finish-cut');
+      if (workshopState.tool === 'free' && workshopState.freePoints.length >= 3) {
+        finishBtn.classList.remove('hidden');
+      } else {
+        finishBtn.classList.add('hidden');
+      }
+
+      // Update Structural Connectivity Card
+      updateStructureCard();
+    }
+
+    function updateStructureCard() {
+      const titleEl = document.getElementById('structure-title');
+      const descEl = document.getElementById('structure-description');
+      if (!titleEl || !descEl) return;
+
+      const count = workshopState.cuts.length;
+      if (count === 0) {
+        titleEl.textContent = '红纸完好 · 待君落刀';
+        descEl.textContent = '点击左侧挑一把剪刀，在中心红纸上轻点即可对称镂刻。';
+        return;
+      }
+
+      const centerCuts = workshopState.cuts.filter((c) => c.r < 55 && c.size > 42);
+      const rimCuts = workshopState.cuts.filter((c) => c.r > 225 && c.size > 45);
+
+      if (centerCuts.length >= 2) {
+        titleEl.textContent = '花心镂空较大 · 留意连接';
+        descEl.textContent = '中心区域剪口偏大，实际剪纸时请注意保留花心纸桥，避免散瓣。';
+      } else if (rimCuts.length >= 3) {
+        titleEl.textContent = '外缘灵动 · 气韵通透';
+        descEl.textContent = '外圈镂空丰富，展开后将形成精美的花边轮廓，结构依然相连。';
+      } else if (count >= 5) {
+        titleEl.textContent = '千刀不断 · 万眼相连';
+        descEl.textContent = `已完成 ${count} 处对称落刀，内外层次饱满，纸桥筋脉稳固贯通。`;
+      } else {
+        titleEl.textContent = '疏密有致 · 结构稳固';
+        descEl.textContent = `当前 ${count} 处对称剪口分布均衡，可继续添刀或点击「展开这份心意」。`;
+      }
+    }
+
+    function pushUndoSnapshot() {
+      workshopState.undoStack.push(JSON.stringify(workshopState.cuts));
+      if (workshopState.undoStack.length > 30) workshopState.undoStack.shift();
+      workshopState.redoStack = [];
+      workshopState.unsavedChanges = true;
+    }
+
+    // ==================== EXPORT SVG & PNG & AI JSON ====================
+    function exportCurrentSvgFile() {
+      const svgMarkup = generatePapercutSvgMarkup(workshopState, 'export-svg');
+      const blob = new Blob([svgMarkup], { type: 'image/svg+xml;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${workshopState.title.replace(/\s+/g, '_')}.svg`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+      showModuleToast('✨ 已导出矢量 SVG 窗花文件');
+    }
+
+    function exportCurrentPngFile() {
+      const svgMarkup = generatePapercutSvgMarkup(workshopState, 'export-png');
+      const svgBlob = new Blob([svgMarkup], { type: 'image/svg+xml;charset=utf-8' });
+      const url = URL.createObjectURL(svgBlob);
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = 1200;
+        canvas.height = 1200;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, 1200, 1200);
+        URL.revokeObjectURL(url);
+        canvas.toBlob((pngBlob) => {
+          if (!pngBlob) return;
+          const pngUrl = URL.createObjectURL(pngBlob);
+          const a = document.createElement('a');
+          a.href = pngUrl;
+          a.download = `${workshopState.title.replace(/\s+/g, '_')}.png`;
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          URL.revokeObjectURL(pngUrl);
+          showModuleToast('🖼️ 已导出透明背景高清 PNG 窗花');
+        }, 'image/png');
+      };
+      img.src = url;
+    }
+
+    // ==================== RENDER TEMPLATES, PATTERNS & COLLECTION ====================
+    function renderTemplatesAndPatterns() {
+      const tplGrid = document.getElementById('template-grid');
+      const patGrid = document.getElementById('pattern-grid');
+
+      function createCardHtml(item, isCompact = false) {
+        const svgHtml = generatePapercutSvgMarkup(item, `tpl-${item.id}`);
+        return `
+          <article class="pattern-card">
+            <div class="flex items-center justify-between text-xs font-serif-cn">
+              <span class="small-tag">${item.tag}</span>
+              <span class="opacity-65">${FOLD_NAMES[item.folds]} · ${item.cuts.length} 刀</span>
+            </div>
+            <div class="pattern-card-art">${svgHtml}</div>
+            <div class="text-center space-y-1">
+              <h3 class="font-serif-cn text-base font-bold m-0">${item.title}</h3>
+              <p class="text-xs opacity-75 font-serif-cn m-0">${item.subtitle}</p>
+              ${!isCompact ? `<p class="text-xs opacity-70 leading-relaxed pt-1 m-0">${item.desc}</p>` : ''}
+            </div>
+            <div class="mt-auto pt-2 flex items-center justify-center gap-2">
+              <button type="button" class="primary-button text-xs py-1.5 px-3.5 w-full" data-load-template="${item.id}">
+                ✂ 载入工坊试剪
+              </button>
+            </div>
+          </article>
+        `;
+      }
+
+      if (tplGrid) {
+        tplGrid.innerHTML = CURATED_PATTERNS.slice(0, 4).map((item) => createCardHtml(item, true)).join('');
+      }
+      if (patGrid) {
+        patGrid.innerHTML = CURATED_PATTERNS.map((item) => createCardHtml(item, false)).join('');
+      }
+    }
+
+    function renderCollectionGrid() {
+      const grid = document.getElementById('collection-grid');
+      const empty = document.getElementById('empty-collection');
+      if (!grid || !empty) return;
+
+      updateCollectionBadge();
+
+      if (workshopState.collection.length === 0) {
+        grid.innerHTML = '';
+        empty.classList.remove('hidden');
+        return;
+      }
+
+      empty.classList.add('hidden');
+      grid.innerHTML = workshopState.collection.map((work) => {
+        const svgHtml = generatePapercutSvgMarkup(work, `col-${work.id}`);
+        const cName = COLOR_NAMES[work.color] || '朱砂红';
+        return `
+          <article class="pattern-card">
+            <div class="flex items-center justify-between text-xs font-serif-cn">
+              <span class="small-tag">${FOLD_NAMES[work.folds] || '八瓣对称'}</span>
+              <span class="opacity-60">${work.createdAt || '典藏窗花'}</span>
+            </div>
+            <div class="pattern-card-art">${svgHtml}</div>
+            <div class="text-center space-y-1">
+              <h3 class="font-serif-cn text-base font-bold m-0">${work.title}</h3>
+              <p class="text-xs opacity-70 font-serif-cn m-0">${cName} · 共 ${work.cuts.length} 处镂空</p>
+            </div>
+            <div class="mt-auto pt-2 grid grid-cols-3 gap-1.5">
+              <button type="button" class="outline-button text-xs py-1 px-2" data-edit-work="${work.id}">编辑</button>
+              <button type="button" class="primary-button text-xs py-1 px-2" data-preview-work="${work.id}">映窗</button>
+              <button type="button" class="outline-button text-xs py-1 px-2" data-delete-work="${work.id}">移除</button>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    // ==================== SWITCH ACTIVE VIEW (HOME / WORKSHOP / PATTERNS / COLLECTION) ====================
+    function switchAppView(viewName) {
+      workshopState.currentView = viewName;
+      const homeView = document.getElementById('home-view');
+      const modulesShell = document.getElementById('modules-shell');
+      const workshopView = document.getElementById('workshop-view');
+      const patternsView = document.getElementById('patterns-view');
+      const collectionView = document.getElementById('collection-view');
+      const pageTitle = document.getElementById('page-title');
+      const pageDesc = document.getElementById('page-description');
+
+      document.querySelectorAll('.nav-link[data-view]').forEach((btn) => {
+        btn.classList.toggle('active', btn.getAttribute('data-view') === viewName);
+      });
+
+      if (viewName === 'home') {
+        homeView.classList.remove('hidden');
+        modulesShell.classList.add('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+
+      homeView.classList.add('hidden');
+      modulesShell.classList.remove('hidden');
+      workshopView.classList.toggle('hidden', viewName !== 'workshop');
+      patternsView.classList.toggle('hidden', viewName !== 'patterns');
+      collectionView.classList.toggle('hidden', viewName !== 'collection');
+
+      if (viewName === 'workshop') {
+        pageTitle.innerHTML = '把心意，<em>剪成花。</em>';
+        pageDesc.textContent = '从一张红纸开始，在折叠与展开之间，遇见自己的第一幅窗花。';
+        renderWorkshopEditorAndPreview();
+      } else if (viewName === 'patterns') {
+        pageTitle.innerHTML = '寻纹问样，<em>刀笔生花。</em>';
+        pageDesc.textContent = '饱览双鱼戏莲、凤穿牡丹、冰梅迎春等传统与练习母题，一键载入工坊自由试剪。';
+        renderTemplatesAndPatterns();
+      } else if (viewName === 'collection') {
+        pageTitle.innerHTML = '藏珍于匣，<em>映窗赏景。</em>';
+        pageDesc.textContent = '将亲手裁就的窗花作品留存于此，随时映于古典花窗木棂间品鉴光影。';
+        renderCollectionGrid();
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      playChime(3);
+    }
+
+
+      // ==================== INITIALIZE UNIFIED THREE MODULES ====================
+      loadCollectionFromStorage();
+      renderTemplatesAndPatterns();
+      renderCollectionGrid();
+      renderWorkshopEditorAndPreview();
+
+      // View Navigation Buttons (Header, Empty State, Return Links)
+      document.addEventListener('click', (e) => {
+        const viewBtn = e.target.closest('[data-view]');
+        if (viewBtn) {
+          e.preventDefault();
+          const targetView = viewBtn.getAttribute('data-view');
+          switchAppView(targetView);
+        }
+      });
+
+      // Brand Top Link returns to Home View
+      const brandLink = document.getElementById('brandTopLink');
+      if (brandLink) {
+        brandLink.addEventListener('click', (e) => {
+          e.preventDefault();
+          switchAppView('home');
+        });
+      }
+
+      // Portal Modal "步入此轩窗 →" Button navigates directly to the corresponding module view!
+      const modalOnlineBtn = document.getElementById('modalOnlineLink');
+      if (modalOnlineBtn) {
+        modalOnlineBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const routePath = (document.getElementById('modalRoutePath').textContent || '').trim();
+          document.getElementById('portalPreviewModal').classList.add('hidden');
+          if (routePath === '/workshop') {
+            switchAppView('workshop');
+          } else if (routePath === '/works') {
+            switchAppView('collection');
+          } else {
+            switchAppView('patterns');
+          }
+          showModuleToast('🌸 已步入「' + document.getElementById('modalTitle').textContent + '」');
+        });
+      }
+
+      // Jump Portals Button works from any view
+      document.getElementById('jumpPortalsBtn').addEventListener('click', () => {
+        if (workshopState.currentView !== 'home') {
+          switchAppView('home');
+          setTimeout(() => {
+            document.getElementById('stage-portals').scrollIntoView({ behavior: 'smooth' });
+          }, 120);
+        } else {
+          document.getElementById('stage-portals').scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+
+      // 1. Fold Selection (#folds)
+      document.getElementById('folds').addEventListener('click', (e) => {
+        const btn = e.target.closest('button[data-fold]');
+        if (!btn) return;
+        const newFold = Number(btn.getAttribute('data-fold'));
+        workshopState.folds = newFold;
+        document.querySelectorAll('#folds button[data-fold]').forEach((b) => {
+          b.classList.toggle('selected', b === btn);
+        });
+        playChime(1);
+        renderWorkshopEditorAndPreview();
+        showModuleToast(`已切换为「${FOLD_NAMES[newFold]}」折纸法`);
+      });
+
+      // 2. Scissor Tool Selection (.shape-options)
+      document.querySelector('.shape-options').addEventListener('click', (e) => {
+        const btn = e.target.closest('button[data-tool]');
+        if (!btn) return;
+        const newTool = btn.getAttribute('data-tool');
+        workshopState.tool = newTool;
+        workshopState.freePoints = [];
+        document.querySelectorAll('.shape-options button[data-tool]').forEach((b) => {
+          b.classList.toggle('selected', b === btn);
+        });
+        document.getElementById('tool-note').textContent = TOOL_NOTES[newTool] || '';
+        playChime(2);
+        renderWorkshopEditorAndPreview();
+      });
+
+      // 3. Cut Size Slider (#cut-size)
+      const cutSizeInput = document.getElementById('cut-size');
+      const sizeValueOutput = document.getElementById('size-value');
+      cutSizeInput.addEventListener('input', () => {
+        workshopState.cutSize = Number(cutSizeInput.value);
+        sizeValueOutput.textContent = cutSizeInput.value;
+        renderWorkshopEditorAndPreview();
+      });
+
+      // 4. Finish Freehand Cut Button (#finish-cut)
+      function commitFreehandCut() {
+        if (workshopState.freePoints.length < 3) {
+          showModuleToast('自由剪请至少在纸面点击 3 个顶点');
+          return;
+        }
+        pushUndoSnapshot();
+        const avgR = workshopState.freePoints.reduce((s, p) => s + p.r, 0) / workshopState.freePoints.length;
+        workshopState.cuts.push({
+          id: 'cut-' + Date.now(),
+          type: 'free',
+          r: avgR,
+          size: workshopState.cutSize,
+          points: workshopState.freePoints.map((p) => ({ r: p.r, relAngle: p.relAngle }))
+        });
+        workshopState.freePoints = [];
+        playChime(4);
+        renderWorkshopEditorAndPreview();
+        showModuleToast('✂ 已完成自由路径对称裁剪');
+      }
+
+      document.getElementById('finish-cut').addEventListener('click', commitFreehandCut);
+
+      // 5. Paper Color Swatches (.color-options)
+      document.querySelector('.color-options').addEventListener('click', (e) => {
+        const btn = e.target.closest('button.color-swatch');
+        if (!btn) return;
+        workshopState.color = btn.getAttribute('data-color');
+        document.querySelectorAll('.color-options .color-swatch').forEach((b) => {
+          b.classList.toggle('selected', b === btn);
+        });
+        playChime(3);
+        renderWorkshopEditorAndPreview();
+        showModuleToast(`已选用「${COLOR_NAMES[workshopState.color] || '传统宣纸'}」`);
+      });
+
+      // 6. Interactive SVG Canvas (#editor) Hover & Click-to-Cut
+      const editorEl = document.getElementById('editor');
+      function getSvgCoords(evt) {
+        const rect = editorEl.getBoundingClientRect();
+        const scaleX = 600 / rect.width;
+        const scaleY = 600 / rect.height;
+        return {
+          x: (evt.clientX - rect.left) * scaleX,
+          y: (evt.clientY - rect.top) * scaleY
+        };
+      }
+
+      editorEl.addEventListener('mousemove', (e) => {
+        const pt = getSvgCoords(e);
+        const dx = pt.x - STAGE_CENTER;
+        const dy = pt.y - STAGE_CENTER;
+        if (Math.sqrt(dx * dx + dy * dy) > PAPER_RADIUS) {
+          if (workshopState.hoverPos) {
+            workshopState.hoverPos = null;
+            renderWorkshopEditorAndPreview();
+          }
+          return;
+        }
+        const canonical = xyToCanonicalWedge(pt.x, pt.y, workshopState.folds);
+        workshopState.hoverPos = { x: pt.x, y: pt.y, r: canonical.r, relAngle: canonical.relAngle };
+        renderWorkshopEditorAndPreview();
+      });
+
+      editorEl.addEventListener('mouseleave', () => {
+        workshopState.hoverPos = null;
+        renderWorkshopEditorAndPreview();
+      });
+
+      editorEl.addEventListener('click', (e) => {
+        const pt = getSvgCoords(e);
+        const dx = pt.x - STAGE_CENTER;
+        const dy = pt.y - STAGE_CENTER;
+        if (Math.sqrt(dx * dx + dy * dy) > PAPER_RADIUS) {
+          showModuleToast('请在圆形红纸范围内落剪');
+          return;
+        }
+
+        const canonical = xyToCanonicalWedge(pt.x, pt.y, workshopState.folds);
+
+        if (workshopState.tool === 'free') {
+          // If clicking near the first vertex and >= 3 points, close & commit
+          if (workshopState.freePoints.length >= 3) {
+            const firstPt = workshopState.freePoints[0];
+            const distFirst = Math.hypot(pt.x - firstPt.x, pt.y - firstPt.y);
+            if (distFirst < 20) {
+              commitFreehandCut();
+              return;
+            }
+          }
+          workshopState.freePoints.push({
+            x: pt.x,
+            y: pt.y,
+            r: canonical.r,
+            relAngle: canonical.relAngle
+          });
+          playChime(workshopState.freePoints.length);
+          renderWorkshopEditorAndPreview();
+          return;
+        }
+
+        pushUndoSnapshot();
+        workshopState.cuts.push({
+          id: 'cut-' + Date.now() + '-' + Math.random().toString(36).slice(2, 5),
+          type: workshopState.tool,
+          r: canonical.r,
+          relAngle: canonical.relAngle,
+          size: workshopState.cutSize
+        });
+        playChime(workshopState.cuts.length);
+        renderWorkshopEditorAndPreview();
+      });
+
+      // 7. Undo / Redo / Reset / Guides / Keyboard Cut
+      function performUndo() {
+        if (workshopState.undoStack.length === 0) return;
+        workshopState.redoStack.push(JSON.stringify(workshopState.cuts));
+        workshopState.cuts = JSON.parse(workshopState.undoStack.pop());
+        playChime(1);
+        renderWorkshopEditorAndPreview();
+      }
+
+      function performRedo() {
+        if (workshopState.redoStack.length === 0) return;
+        workshopState.undoStack.push(JSON.stringify(workshopState.cuts));
+        workshopState.cuts = JSON.parse(workshopState.redoStack.pop());
+        playChime(2);
+        renderWorkshopEditorAndPreview();
+      }
+
+      document.getElementById('undo').addEventListener('click', performUndo);
+      document.getElementById('redo').addEventListener('click', performRedo);
+
+      let pendingConfirmCallback = null;
+      const confirmDlg = document.getElementById('confirm-dialog');
+
+      function requestConfirmation(title, message, onConfirm) {
+        if (!workshopState.unsavedChanges || workshopState.cuts.length === 0) {
+          onConfirm();
+          return;
+        }
+        document.getElementById('confirm-title').textContent = title;
+        document.getElementById('confirm-message').textContent = message;
+        pendingConfirmCallback = onConfirm;
+        openDialogSafe(confirmDlg);
+      }
+
+      document.getElementById('confirm-cancel').addEventListener('click', () => {
+        pendingConfirmCallback = null;
+        closeDialogSafe(confirmDlg);
+      });
+
+      document.getElementById('confirm-ok').addEventListener('click', () => {
+        const cb = pendingConfirmCallback;
+        pendingConfirmCallback = null;
+        closeDialogSafe(confirmDlg);
+        if (cb) cb();
+      });
+
+      document.getElementById('reset').addEventListener('click', () => {
+        requestConfirmation('换一张新纸？', '当前红纸上的剪口尚未收藏，确认清空并换上空白红纸吗？', () => {
+          pushUndoSnapshot();
+          workshopState.cuts = [];
+          workshopState.freePoints = [];
+          workshopState.title = '团花 · 新裁';
+          workshopState.unsavedChanges = false;
+          playChime(0);
+          renderWorkshopEditorAndPreview();
+          showModuleToast('已换上一张空白红纸');
+        });
+      });
+
+      document.getElementById('show-guides').addEventListener('change', (e) => {
+        workshopState.showGuides = e.target.checked;
+        renderWorkshopEditorAndPreview();
+      });
+
+      document.getElementById('keyboard-cut').addEventListener('click', () => {
+        pushUndoSnapshot();
+        const stepIdx = workshopState.cuts.length;
+        const r = 55 + ((stepIdx * 37) % 165);
+        const relAngle = 0.22 + ((stepIdx * 0.19) % 0.58);
+        const toolType = workshopState.tool === 'free' ? 'leaf' : workshopState.tool;
+        workshopState.cuts.push({
+          id: 'cut-kb-' + Date.now(),
+          type: toolType,
+          r,
+          relAngle,
+          size: workshopState.cutSize
+        });
+        playChime(stepIdx + 1);
+        renderWorkshopEditorAndPreview();
+        showModuleToast('✂ 已在对称选区试剪一刀');
+      });
+
+      // Keyboard Shortcuts (Ctrl+Z, Ctrl+Shift+Z, Enter, Esc)
+      window.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') {
+          if (workshopState.currentView === 'workshop') {
+            e.preventDefault();
+            if (e.shiftKey) performRedo();
+            else performUndo();
+          }
+        } else if (e.key === 'Enter' && workshopState.tool === 'free' && workshopState.freePoints.length >= 3) {
+          e.preventDefault();
+          commitFreehandCut();
+        } else if (e.key === 'Escape') {
+          if (workshopState.freePoints.length > 0) {
+            workshopState.freePoints = [];
+            renderWorkshopEditorAndPreview();
+            showModuleToast('已取消未完成的自由剪路径');
+          }
+        }
+      });
+
+      // 8. Unfold & Result Window Lattice Dialog (#unfold, #result-dialog)
+      const resultDlg = document.getElementById('result-dialog');
+      document.getElementById('unfold').addEventListener('click', () => {
+        document.getElementById('result-art').innerHTML = generatePapercutSvgMarkup(workshopState, 'result-lattice');
+        document.getElementById('work-name').value = workshopState.title;
+        playChime(5);
+        burstPaperButterflies();
+        openDialogSafe(resultDlg);
+      });
+
+      function saveCurrentWorkToCollection(customTitle) {
+        const finalTitle = (customTitle || workshopState.title || '我的第一幅窗花').trim();
+        workshopState.title = finalTitle;
+        const newWork = {
+          id: 'work-' + Date.now(),
+          title: finalTitle,
+          folds: workshopState.folds,
+          color: workshopState.color,
+          createdAt: '2026-10-16',
+          cuts: JSON.parse(JSON.stringify(workshopState.cuts))
+        };
+        workshopState.collection.unshift(newWork);
+        workshopState.unsavedChanges = false;
+        saveCollectionToStorage();
+        renderWorkshopEditorAndPreview();
+        renderCollectionGrid();
+        playChime(6);
+        showModuleToast(`🔖 已将「${finalTitle}」收入我的作品匣`);
+      }
+
+      document.getElementById('save').addEventListener('click', () => {
+        saveCurrentWorkToCollection(workshopState.title);
+      });
+
+      document.getElementById('result-save').addEventListener('click', () => {
+        const inputTitle = document.getElementById('work-name').value;
+        saveCurrentWorkToCollection(inputTitle);
+        closeDialogSafe(resultDlg);
+      });
+
+      document.getElementById('export').addEventListener('click', exportCurrentPngFile);
+      document.getElementById('result-export').addEventListener('click', exportCurrentPngFile);
+      document.getElementById('export-svg').addEventListener('click', exportCurrentSvgFile);
+
+      // 9. Help Dialog (#help, #help-dialog) & Dialog Close Buttons ([data-close])
+      const helpDlg = document.getElementById('help-dialog');
+      document.getElementById('help').addEventListener('click', () => {
+        openDialogSafe(helpDlg);
+      });
+
+      document.querySelectorAll('[data-close]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const dlg = btn.closest('dialog');
+          if (dlg) closeDialogSafe(dlg);
+        });
+      });
+
+      // 10. AI Creative Partner (#ai-generate, #ai-apply, #export-ai-record, .ai-preset-chip)
+      document.querySelectorAll('.ai-preset-chip').forEach((chip) => {
+        chip.addEventListener('click', () => {
+          document.getElementById('ai-brief').value = chip.getAttribute('data-prompt') || '';
+          document.getElementById('ai-generate').click();
+        });
+      });
+
+      document.getElementById('ai-generate').addEventListener('click', () => {
+        const brief = (document.getElementById('ai-brief').value || '').trim() || '给朋友一幅表达吉祥美好祝福的八瓣团花';
+        const statusEl = document.getElementById('ai-status');
+        statusEl.textContent = '正在构思对称纹样骨骼…';
+
+        let folds = 8;
+        if (brief.includes('四瓣') || brief.includes('方胜') || brief.includes('长辈')) folds = 4;
+        else if (brief.includes('六瓣') || brief.includes('雪') || brief.includes('梅') || brief.includes('春')) folds = 6;
+
+        let color = '#b5382d';
+        if (brief.includes('婚') || brief.includes('爱') || brief.includes('桃') || brief.includes('繁花')) color = '#94413c';
+        else if (brief.includes('金') || brief.includes('毕业') || brief.includes('前程') || brief.includes('辉煌')) color = '#ad7f35';
+        else if (brief.includes('松') || brief.includes('竹') || brief.includes('山水') || brief.includes('青')) color = '#426d68';
+
+        const isSimple = brief.includes('简洁') || brief.includes('清爽') || brief.includes('初学');
+        let title = '瑞彩团花 · 锦心巧裁';
+        let explanation = '融合中心太阳珠孔、放射状柳叶花瓣与外圈月牙锯齿纹，兼具传统团花气韵与稳固纸桥结构。';
+
+        if (brief.includes('毕业') || brief.includes('前程')) {
+          title = '鹏程万里 · 乘风破浪';
+          explanation = '采用舒展向上的修长柳叶羽翼纹与外环朝阳圆孔，寓意前程似锦、扶摇直上。';
+        } else if (brief.includes('新春') || brief.includes('年') || brief.includes('平安')) {
+          title = '岁岁平安 · 瑞雪迎春';
+          explanation = '六瓣瑞雪骨骼搭配饱满莲瓣与如意珠孔，象征阖家团圆、岁岁有余。';
+        } else if (brief.includes('婚') || brief.includes('爱') || brief.includes('佳偶')) {
+          title = '花好月圆 · 锦瑟和鸣';
+          explanation = '八瓣双层同心花瓣环绕花心圆珠，层叠温润，寄托百年好合之美意。';
+        } else if (brief.includes('寿') || brief.includes('长辈') || brief.includes('松')) {
+          title = '松鹤延年 · 四季常青';
+          explanation = '端方稳健的对称几何骨架配以苍劲松针角纹，寓意福寿安康、基业常青。';
+        }
+
+        const generatedCuts = [
+          { id: 'ai-1', type: 'circle', r: 38, relAngle: 0.5, size: 16 },
+          { id: 'ai-2', type: 'leaf', r: 88, relAngle: 0.34, size: 32 },
+          { id: 'ai-3', type: 'triangle', r: 136, relAngle: 0.68, size: 26 },
+          { id: 'ai-4', type: 'leaf', r: 185, relAngle: 0.42, size: 34 }
+        ];
+        if (!isSimple) {
+          generatedCuts.push(
+            { id: 'ai-5', type: 'triangle', r: 214, relAngle: 0.72, size: 22 },
+            { id: 'ai-6', type: 'circle', r: 230, relAngle: 0.26, size: 14 }
+          );
+        }
+
+        workshopState.pendingProposal = {
+          prompt: brief,
+          title,
+          explanation,
+          folds,
+          color,
+          cuts: generatedCuts,
+          generatedAt: new Date().toISOString()
+        };
+
+        statusEl.textContent = '✨ 草案已生成，可右侧预览或载入画布';
+        document.getElementById('ai-title').textContent = title;
+        document.getElementById('ai-explanation').textContent = `${FOLD_NAMES[folds]} · ${COLOR_NAMES[color]} · ${explanation}`;
+        document.getElementById('ai-art').innerHTML = generatePapercutSvgMarkup(workshopState.pendingProposal, 'ai-prop');
+        document.getElementById('ai-proposal').classList.remove('hidden');
+        playChime(4);
+      });
+
+      document.getElementById('ai-apply').addEventListener('click', () => {
+        if (!workshopState.pendingProposal) return;
+        const prop = workshopState.pendingProposal;
+        pushUndoSnapshot();
+        workshopState.title = prop.title;
+        workshopState.folds = prop.folds;
+        workshopState.color = prop.color;
+        workshopState.cuts = JSON.parse(JSON.stringify(prop.cuts));
+        workshopState.lastAiRecord = prop;
+
+        // Sync UI buttons
+        document.querySelectorAll('#folds button[data-fold]').forEach((b) => {
+          b.classList.toggle('selected', Number(b.getAttribute('data-fold')) === prop.folds);
+        });
+        document.querySelectorAll('.color-options .color-swatch').forEach((b) => {
+          b.classList.toggle('selected', b.getAttribute('data-color') === prop.color);
+        });
+        document.getElementById('export-ai-record').classList.remove('hidden');
+
+        renderWorkshopEditorAndPreview();
+        document.getElementById('paper-stage').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        playChime(6);
+        showModuleToast(`✨ 已将 AI 草案「${prop.title}」载入剪纸创作台`);
+      });
+
+      document.getElementById('export-ai-record').addEventListener('click', () => {
+        const record = {
+          project: '纸上生花 · AI 协同非遗剪纸创作记录',
+          aiProposal: workshopState.lastAiRecord,
+          finalWork: {
+            title: workshopState.title,
+            folds: workshopState.folds,
+            color: workshopState.color,
+            cutCount: workshopState.cuts.length,
+            cuts: workshopState.cuts
+          },
+          exportedAt: new Date().toISOString()
+        };
+        const blob = new Blob([JSON.stringify(record, null, 2)], { type: 'application/json;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${workshopState.title.replace(/\s+/g, '_')}_AI创作记录.json`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+        showModuleToast('📄 已下载 AI 协同创作记录 JSON');
+      });
+
+      // 11. See All Patterns Button & Load Template / Collection Actions
+      document.getElementById('see-patterns').addEventListener('click', () => {
+        switchAppView('patterns');
+      });
+
+      document.addEventListener('click', (e) => {
+        // Load template into workshop
+        const tplBtn = e.target.closest('[data-load-template]');
+        if (tplBtn) {
+          const tplId = tplBtn.getAttribute('data-load-template');
+          const tpl = CURATED_PATTERNS.find((t) => t.id === tplId);
+          if (!tpl) return;
+          pushUndoSnapshot();
+          workshopState.title = tpl.title;
+          workshopState.folds = tpl.folds;
+          workshopState.color = tpl.color;
+          workshopState.cuts = JSON.parse(JSON.stringify(tpl.cuts));
+          workshopState.unsavedChanges = false;
+
+          document.querySelectorAll('#folds button[data-fold]').forEach((b) => {
+            b.classList.toggle('selected', Number(b.getAttribute('data-fold')) === tpl.folds);
+          });
+          document.querySelectorAll('.color-options .color-swatch').forEach((b) => {
+            b.classList.toggle('selected', b.getAttribute('data-color') === tpl.color);
+          });
+
+          switchAppView('workshop');
+          showModuleToast(`✂ 已载入「${tpl.title}」纹样，可在画布继续添刀或展开`);
+          return;
+        }
+
+        // Collection: Edit Work
+        const editBtn = e.target.closest('[data-edit-work]');
+        if (editBtn) {
+          const wId = editBtn.getAttribute('data-edit-work');
+          const work = workshopState.collection.find((w) => w.id === wId);
+          if (!work) return;
+          pushUndoSnapshot();
+          workshopState.title = work.title;
+          workshopState.folds = work.folds;
+          workshopState.color = work.color;
+          workshopState.cuts = JSON.parse(JSON.stringify(work.cuts));
+          workshopState.unsavedChanges = false;
+          switchAppView('workshop');
+          showModuleToast(`✂ 已载入作品「${work.title}」`);
+          return;
+        }
+
+        // Collection: Preview Work in Window Lattice
+        const prevBtn = e.target.closest('[data-preview-work]');
+        if (prevBtn) {
+          const wId = prevBtn.getAttribute('data-preview-work');
+          const work = workshopState.collection.find((w) => w.id === wId);
+          if (!work) return;
+          workshopState.title = work.title;
+          workshopState.folds = work.folds;
+          workshopState.color = work.color;
+          workshopState.cuts = JSON.parse(JSON.stringify(work.cuts));
+          renderWorkshopEditorAndPreview();
+          document.getElementById('result-art').innerHTML = generatePapercutSvgMarkup(work, 'result-col');
+          document.getElementById('work-name').value = work.title;
+          playChime(5);
+          openDialogSafe(resultDlg);
+          return;
+        }
+
+        // Collection: Delete Work
+        const delBtn = e.target.closest('[data-delete-work]');
+        if (delBtn) {
+          const wId = delBtn.getAttribute('data-delete-work');
+          workshopState.collection = workshopState.collection.filter((w) => w.id !== wId);
+          saveCollectionToStorage();
+          renderCollectionGrid();
+          showModuleToast('已从作品匣中移除该窗花');
+        }
+      });
+
     });
+
   </script>
 </body>
 </html>
