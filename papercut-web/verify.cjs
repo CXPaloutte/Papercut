@@ -27,7 +27,7 @@ const { chromium } = require(process.argv[2]);
   const context=await browser.newContext({viewport:{width:1440,height:1080},deviceScaleFactor:1,acceptDownloads:true});
   const page=await context.newPage();const errors=[];page.on('pageerror',error=>errors.push(error.message));
   try {
-    await page.goto(pathToFileURL(path.join(__dirname,'dist/index.html')).href);
+    await page.goto(pathToFileURL(path.join(__dirname,'dist/workshop.html')).href);
     await page.waitForFunction(()=>document.querySelector('#structure-title').textContent!=='正在检查连接…');
     await page.screenshot({path:path.join(output,'desktop.png'),fullPage:true});
     console.log('Initial structure:',await page.locator('#structure-title').textContent());

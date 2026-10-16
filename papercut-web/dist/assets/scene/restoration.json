@@ -1,0 +1,20 @@
+[
+  {
+    "file": "fish-whole-left.webp",
+    "source": "fish-left.png",
+    "operation": "continuous smooth row remap; original connected selection never split",
+    "size": [
+      1769,
+      2676
+    ]
+  },
+  {
+    "file": "fish-whole-right.webp",
+    "source": "fish-right.png",
+    "operation": "continuous smooth row remap; original connected selection never split",
+    "size": [
+      1788,
+      2625
+    ]
+  }
+]

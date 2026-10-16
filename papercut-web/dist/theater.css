@@ -1,0 +1,185 @@
+
+    :root {
+      --bg-base: #FBF6EC;
+      --bg-secondary: #F2E5CE;
+      --c1: #C82423; /* 朱砂主红 */
+      --c2: #1D8377; /* 石绿/青绿 */
+      --c3: #E89B1E; /* 泥金/明黄 */
+      --c4: #204E6E; /* 靛青/花青 */
+      --c5: #E04868; /* 胭脂牡丹 */
+      --ink-text: #221714;
+      --light-x: 50%;
+      --light-y: 44%;
+      --tilt-x: 0deg;
+      --tilt-y: 0deg;
+      --layer-spread: 1;
+      --shadow-x: 0px;
+      --shadow-y: 12px;
+    }
+
+    body.lantern-night {
+      --bg-base: #0E090B;
+      --bg-secondary: #1B1016;
+      --ink-text: #FDF7EC;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+      background-color: var(--bg-base);
+      color: var(--ink-text);
+      overflow-x: hidden;
+      transition: background-color 0.65s ease, color 0.65s ease;
+    }
+
+    .font-serif-cn {
+      font-family: 'Noto Serif SC', "Songti SC", STSong, serif;
+    }
+
+    /* Rich Multi-Hue Xuan Paper & Lantern Aura Backdrop */
+    .theater-backdrop {
+      background:
+        radial-gradient(560px circle at var(--light-x) var(--light-y), rgba(255, 215, 115, 0.42) 0%, rgba(200, 36, 35, 0.10) 38%, rgba(29, 131, 119, 0.08) 65%, transparent 82%),
+        radial-gradient(circle at 15% 20%, rgba(29, 131, 119, 0.09) 0%, transparent 45%),
+        radial-gradient(circle at 85% 25%, rgba(224, 72, 104, 0.09) 0%, transparent 45%),
+        repeating-linear-gradient(35deg, rgba(120, 90, 70, 0.018) 0px, rgba(120, 90, 70, 0.018) 1px, transparent 1px, transparent 6px),
+        linear-gradient(180deg, var(--bg-base) 0%, var(--bg-secondary) 100%);
+    }
+
+    body.lantern-night .theater-backdrop {
+      background:
+        radial-gradient(640px circle at var(--light-x) var(--light-y), rgba(255, 196, 85, 0.35) 0%, rgba(200, 36, 35, 0.18) 38%, rgba(29, 131, 119, 0.14) 64%, transparent 82%),
+        radial-gradient(circle at 20% 30%, rgba(32, 78, 110, 0.28) 0%, transparent 55%),
+        radial-gradient(circle at 80% 70%, rgba(200, 36, 35, 0.22) 0%, transparent 55%),
+        linear-gradient(180deg, #0D080A 0%, #190F14 50%, #0F0A0D 100%);
+    }
+
+    /* ==================== TRUE 2.5D / 3D DIORAMA PERSPECTIVE ENGINE ==================== */
+    .diorama-viewport {
+      perspective: 1100px;
+      transform-style: preserve-3d;
+    }
+
+    .diorama-stage {
+      transform-style: preserve-3d;
+      transform: rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+      transition: transform 0.14s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: transform;
+    }
+
+    /* 5 Distinct Z-Depth Planes for Authentic Multi-Layer Paper Sculpture */
+    .z-plane-0 {
+      transform: translateZ(calc(-55px * var(--layer-spread))) scale(1.06);
+      filter: drop-shadow(0 8px 18px rgba(20, 10, 8, 0.22));
+      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .z-plane-1 {
+      transform: translateZ(calc(-15px * var(--layer-spread)));
+      filter: drop-shadow(calc(var(--shadow-x) * 0.6) calc(var(--shadow-y) * 0.6) 14px rgba(20, 8, 6, 0.32));
+      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .z-plane-2 {
+      transform: translateZ(calc(30px * var(--layer-spread)));
+      filter: drop-shadow(var(--shadow-x) var(--shadow-y) 18px rgba(20, 8, 6, 0.38));
+      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .z-plane-3 {
+      transform: translateZ(calc(75px * var(--layer-spread)));
+      filter: drop-shadow(calc(var(--shadow-x) * 1.3) calc(var(--shadow-y) * 1.3) 22px rgba(15, 5, 4, 0.44));
+      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .z-plane-4 {
+      transform: translateZ(calc(120px * var(--layer-spread)));
+      filter: drop-shadow(calc(var(--shadow-x) * 1.6) calc(var(--shadow-y) * 1.6) 28px rgba(10, 3, 2, 0.52));
+      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .z-plane-5 {
+      transform: translateZ(calc(160px * var(--layer-spread)));
+      filter: drop-shadow(calc(var(--shadow-x) * 1.9) calc(var(--shadow-y) * 1.9) 32px rgba(10, 3, 2, 0.58));
+      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    body.lantern-night .z-plane-2,
+    body.lantern-night .z-plane-3,
+    body.lantern-night .z-plane-4 {
+      filter:
+        drop-shadow(0 0 18px rgba(255, 200, 90, 0.35))
+        drop-shadow(calc(var(--shadow-x) * 1.3) calc(var(--shadow-y) * 1.3) 24px rgba(0, 0, 0, 0.85));
+    }
+
+    /* Continuous Counter-Rotations for Living Mandala Rings */
+    @keyframes spinCW {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes spinCCW {
+      from { transform: rotate(360deg); }
+      to { transform: rotate(0deg); }
+    }
+    @keyframes breathePulse {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.035) rotate(3deg); }
+    }
+
+    .ring-spin-slow-cw { animation: spinCW 68s linear infinite; }
+    .ring-spin-mid-ccw { animation: spinCCW 46s linear infinite; }
+    .ring-spin-fast-cw { animation: spinCW 34s linear infinite; }
+    .ring-breathe { animation: breathePulse 6s ease-in-out infinite; }
+
+    /* Traditional Shaped Window Portals (Non-Rectangular!) */
+    .portal-moon { border-radius: 9999px; }
+    .portal-begonia { border-radius: 42% 58% 45% 55% / 55% 45% 55% 45%; }
+    .portal-octagon { clip-path: polygon(28% 0%, 72% 0%, 100% 28%, 100% 72%, 72% 100%, 28% 100%, 0% 72%, 0% 28%); }
+    .portal-fan { border-radius: 50% 50% 18% 18% / 65% 65% 25% 25%; }
+    .portal-leaf { border-radius: 65% 35% 62% 38% / 40% 62% 38% 60%; }
+
+    .window-portal-3d {
+      perspective: 800px;
+      transform-style: preserve-3d;
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .window-portal-3d:hover {
+      transform: translateY(-10px) rotateX(6deg) rotateY(-8deg) scale(1.04);
+    }
+
+    .portal-inner-glow {
+      background:
+        radial-gradient(circle at 50% 42%, #FFFDF9 0%, #FCEFD2 48%, #F0D5A8 82%, #DFB982 100%);
+      box-shadow:
+        inset 0 0 38px rgba(200, 36, 35, 0.18),
+        0 22px 48px -12px rgba(45, 15, 10, 0.34);
+    }
+    body.lantern-night .portal-inner-glow {
+      background:
+        radial-gradient(circle at 50% 42%, #FFF3C4 0%, #F7B74A 45%, #B83A1B 82%, #3A1014 100%);
+      box-shadow:
+        inset 0 0 48px rgba(255, 225, 130, 0.72),
+        0 0 55px rgba(247, 183, 74, 0.32);
+    }
+
+    .vertical-rl {
+      writing-mode: vertical-rl;
+      text-orientation: upright;
+    }
+
+    .cinnabar-seal {
+      border: 1.5px solid var(--c1);
+      background: linear-gradient(135deg, var(--c1), #8F1514);
+      color: #FFFDF8;
+      box-shadow: inset 0 0 0 2px #FBF6EC;
+    }
+
+    /* Multi-color gradient title accent */
+    .polychrome-text {
+      background: linear-gradient(120deg, var(--c1) 0%, var(--c3) 38%, var(--c2) 72%, var(--c5) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-base); }
+    ::-webkit-scrollbar-thumb { background: var(--c1); border-radius: 9999px; }
+  

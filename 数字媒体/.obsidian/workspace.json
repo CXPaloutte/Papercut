@@ -83,8 +83,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "right": {
     "id": "5add184816fa0505",
@@ -190,5 +189,9 @@
     }
   },
   "active": "1d0764676b1c7bb0",
-  "lastOpenFiles": []
+  "lastOpenFiles": [
+    "剪映古今-作品规划.md",
+    "papercut.md",
+    "规划评估与作品说明.md"
+  ]
 }

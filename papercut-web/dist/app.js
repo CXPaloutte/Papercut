@@ -194,6 +194,8 @@
     }));
   }
   loadStorage();renderTemplates();renderCollection();render();selectTool('leaf');
+  const entryView = new URLSearchParams(location.search).get('view');
+  if (entryView === 'patterns' || entryView === 'collection') changeView(entryView);
   $$('[data-view]').forEach(button=>button.addEventListener('click',()=>changeView(button.dataset.view)));
   $('.brand').addEventListener('click',event=>{event.preventDefault();changeView('workshop');});
   $('#see-patterns').addEventListener('click',()=>changeView('patterns'));
